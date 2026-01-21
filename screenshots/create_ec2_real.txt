@@ -1,0 +1,20 @@
+[2026-01-21 11:58:44] [INFO] ==========================================
+[2026-01-21 11:58:44] [INFO] EC2 Creation via State Manager
+[2026-01-21 11:58:44] [INFO] ==========================================
+
+Enter CIDR block for SSH access (e.g., 203.0.113.0/24 or 0.0.0.0/0 for anywhere): [2026-01-21 11:58:49] [INFO] SSH CIDR set to: 0.0.0.0/0
+[2026-01-21 11:59:01] [INFO] [1/4] Resolving latest Amazon Linux 2 AMI...
+[2026-01-21 11:59:03] [INFO] ✓ AMI resolved: ami-05000e6b0662e03c0
+[2026-01-21 11:59:03] [INFO] [2/4] Creating security group via state manager...
+
+An error occurred (InvalidGroup.Duplicate) when calling the CreateSecurityGroup operation: The security group 'devops-sg' already exists for VPC 'vpc-0b78b8a32a1fbf452'
+[2026-01-21 11:59:09] [INFO] Adding SSH ingress rule to security group...
+[33m[2026-01-21 11:59:11] [WARN] SSH rule may already exist[0m
+[2026-01-21 11:59:11] [INFO] ✓ Security group configured (SSH from 0.0.0.0/0)
+[2026-01-21 11:59:11] [INFO] [3/4] Creating key pair via state manager...
+[2026-01-21 11:59:17] [INFO] [4/4] Launching EC2 via state manager...
+
+An error occurred (MissingParameter) when calling the RunInstances operation: When specifying a security group you must specify one of group id or group name for each item
+[2026-01-21 11:59:24] [INFO] Waiting for instance to be running...
+
+Waiter InstanceRunning failed: An error occurred (MissingParameter): The request must contain the parameter InstanceId

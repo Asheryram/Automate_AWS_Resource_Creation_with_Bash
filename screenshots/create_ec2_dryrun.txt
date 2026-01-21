@@ -1,0 +1,22 @@
+[2026-01-21 11:42:55] [INFO] ==========================================
+[2026-01-21 11:42:55] [INFO] EC2 Creation via State Manager
+[33m[2026-01-21 11:42:55] [WARN] DRY-RUN MODE ENABLED[0m
+[2026-01-21 11:42:55] [INFO] ==========================================
+
+Enter CIDR block for SSH access (e.g., 203.0.113.0/24 or 0.0.0.0/0 for anywhere): [2026-01-21 11:43:03] [INFO] SSH CIDR set to: 0.0.0.0/0
+[35m[2026-01-21 11:43:12] [DRYRUN] ==================== DRY-RUN ====================[0m
+[35m[2026-01-21 11:43:12] [DRYRUN] The script will perform the following actions:[0m
+[35m[2026-01-21 11:43:12] [DRYRUN] 1️ Resolve AMI:[0m
+[35m[2026-01-21 11:43:14] [DRYRUN]    AMI ID: ami-05000e6b0662e03c0[0m
+[35m[2026-01-21 11:43:18] [DRYRUN] 2️ Security Groups:[0m
+[35m[2026-01-21 11:43:18] [DRYRUN]    New security group will be created: devops-sg[0m
+[35m[2026-01-21 11:43:18] [DRYRUN]    Ingress Rules: SSH (22) from 0.0.0.0/0[0m
+[35m[2026-01-21 11:43:24] [DRYRUN] 3️ Key Pairs:[0m
+[35m[2026-01-21 11:43:24] [DRYRUN]    No key pairs yet -> (will be created) (known after apply)[0m
+[35m[2026-01-21 11:43:27] [DRYRUN] 4️ EC2 Instances:[0m
+[35m[2026-01-21 11:43:27] [DRYRUN]    Region: eu-central-1[0m
+[35m[2026-01-21 11:43:27] [DRYRUN]    Instance Type: t2.micro[0m
+[35m[2026-01-21 11:43:27] [DRYRUN]    Tags: Project=AutomationLab[0m
+[35m[2026-01-21 11:43:27] [DRYRUN]    New instance will be created with above configuration (ID: known after apply)[0m
+[35m[2026-01-21 11:43:27] [DRYRUN] ==================================================[0m
+[35m[2026-01-21 11:43:27] [DRYRUN] No resources will be created or modified in dry-run mode.[0m

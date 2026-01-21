@@ -245,6 +245,29 @@ cat state.json
 
 ---
 
+**Screenshots**
+
+- **Create EC2 — Dry-run:** ![Create EC2 Dry-run](screenshots/create_ec2_dryrun.png)
+  - **Create EC2 — Real:** ![Create EC2 Real-run](screenshots/create_ec2_real.png)
+
+- **Create S3 Bucket — Dry-run:** ![Create S3 Dry-run](screenshots/create_s3_bucket_dryrun.png)
+  - **Create S3 Bucket — Real:** ![Create S3 Real-run](screenshots/create_s3_bucket_real.png)
+
+- **Create Security Group — Dry-run:** ![Create SG Dry-run](screenshots/create_security_group_dryrun.png)
+  - **Create Security Group — Real:** ![Create SG Real-run](screenshots/create_security_group_real.png)
+
+- **Cleanup Resources — Dry-run:** ![Cleanup Dry-run](screenshots/cleanup_resources_dryrun.png)
+  - **Cleanup Resources — Real:** ![Cleanup Real-run](screenshots/cleanup_resources_real.png)
+
+Run the capture and image-generation helpers to produce these files locally:
+
+```bash
+./capture_outputs.sh      # dry-run mode creates *_dryrun.txt outputs
+./capture_outputs.sh real # real mode (prompts; creates *_real.txt outputs)
+./generate_images.sh      # converts .txt outputs to PNG images in screenshots/
+```
+
+
 ## Challenges Faced & Resolutions
 
 ### Challenge 1: AWS CLI Output Interference
@@ -430,11 +453,3 @@ aws configure
 # Reset state from S3
 source ./state/state_manager.sh
 state_pull
-```
-
-### SSH connection timeout
-- Verify security group has SSH rule (port 22)
-- Check CIDR range matches your IP
-- Confirm instance is running: `aws ec2 describe-instances`
-
----

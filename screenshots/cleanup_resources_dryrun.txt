@@ -1,0 +1,19 @@
+[2026-01-21 11:43:27] [INFO] ==========================================
+[2026-01-21 11:43:27] [INFO] AWS Resources Cleanup Script Started
+[35m[2026-01-21 11:43:27] [DRYRUN] DRY-RUN MODE: No changes will be made[0m
+[2026-01-21 11:43:27] [INFO] ==========================================
+[35m[2026-01-21 11:43:38] [DRYRUN] [0m
+[35m[2026-01-21 11:43:38] [DRYRUN] ==========================================[0m
+[35m[2026-01-21 11:43:38] [DRYRUN] DRY-RUN SUMMARY[0m
+[35m[2026-01-21 11:43:38] [DRYRUN] ==========================================[0m
+[35m[2026-01-21 11:43:38] [DRYRUN] Resources tracked in remote state.json that would be deleted:[0m
+[35m[2026-01-21 11:43:38] [DRYRUN] EC2 Instances:[0m
+[35m[2026-01-21 11:43:38] [DRYRUN]   None[0m
+[35m[2026-01-21 11:43:38] [DRYRUN] Key Pairs:[0m
+[35m[2026-01-21 11:43:38] [DRYRUN]   None[0m
+[35m[2026-01-21 11:43:38] [DRYRUN] Security Groups:[0m
+[35m[2026-01-21 11:43:38] [DRYRUN]   None[0m
+[35m[2026-01-21 11:43:38] [DRYRUN] S3 Buckets:[0m
+[35m[2026-01-21 11:43:38] [DRYRUN]   None[0m
+[35m[2026-01-21 11:43:38] [DRYRUN] ==========================================[0m
+[35m[2026-01-21 11:43:38] [DRYRUN] No resources will be deleted in dry-run mode[0m

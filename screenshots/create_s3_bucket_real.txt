@@ -1,0 +1,24 @@
+[2026-01-21 11:57:50] [INFO] ==========================================
+[2026-01-21 11:57:50] [INFO] S3 Bucket Creation via State Manager
+[2026-01-21 11:57:50] [INFO] ==========================================
+[2026-01-21 11:58:00] [INFO] [1/5] Creating S3 bucket: automation-lab-bucket-1768996670-sage
+{
+    "Location": "http://automation-lab-bucket-1768996670-sage.s3.amazonaws.com/",
+    "BucketArn": "arn:aws:s3:::automation-lab-bucket-1768996670-sage"
+}
+[2026-01-21 11:58:01] [INFO] ✓ Bucket created
+[2026-01-21 11:58:01] [INFO] [2/5] Enabling versioning
+[2026-01-21 11:58:03] [INFO] ✓ Versioning enabled
+[2026-01-21 11:58:03] [INFO] [3/5] Adding tags
+[2026-01-21 11:58:04] [INFO] [4/5] Creating and uploading sample file
+Completed 147 Bytes/147 Bytes (202 Bytes/s) with 1 file(s) remainingupload: ./welcome.txt to s3://automation-lab-bucket-1768996670-sage/welcome.txt
+[2026-01-21 11:58:06] [INFO] ✓ Sample file uploaded
+[2026-01-21 11:58:06] [INFO] [5/5] Tracking bucket in remote state
+[2026-01-21 11:58:11] [INFO] ==========================================
+[2026-01-21 11:58:11] [INFO] S3 Bucket Created & Tracked
+[2026-01-21 11:58:11] [INFO] Bucket: automation-lab-bucket-1768996670-sage
+[2026-01-21 11:58:11] [INFO] Region: eu-central-1
+[2026-01-21 11:58:11] [INFO] Versioning: Enabled
+[2026-01-21 11:58:11] [INFO] ==========================================
+[2026-01-21 11:58:11] [INFO] Bucket name saved to s3_bucket_name.txt
+[2026-01-21 11:58:11] [INFO] Script completed successfully

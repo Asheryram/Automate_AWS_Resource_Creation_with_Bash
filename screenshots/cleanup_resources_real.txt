@@ -1,0 +1,32 @@
+[2026-01-21 11:59:25] [INFO] ==========================================
+[2026-01-21 11:59:25] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 11:59:25] [INFO] ==========================================
+[2026-01-21 11:59:36] [INFO] 
+[2026-01-21 11:59:36] [INFO] ==========================================
+[2026-01-21 11:59:36] [INFO] RESOURCES TO BE DELETED
+[2026-01-21 11:59:36] [INFO] ==========================================
+[2026-01-21 11:59:36] [INFO] EC2 Instances:
+[2026-01-21 11:59:36] [INFO]   None
+[2026-01-21 11:59:36] [INFO] Key Pairs:
+[2026-01-21 11:59:37] [INFO]   - automation-lab-key-1768996751 | Created: 2026-01-21T11:59:12Z
+[2026-01-21 11:59:37] [INFO] Security Groups:
+[2026-01-21 11:59:37] [INFO]   - sg-0f4b695dc111dda9a | Name: devops-sg | Created: 2026-01-21T11:58:35Z
+[2026-01-21 11:59:37] [INFO] S3 Buckets:
+[2026-01-21 11:59:37] [INFO]   - automation-lab-bucket-1768996670-sage | Created: 2026-01-21T11:58:06Z
+[2026-01-21 11:59:37] [INFO] ==========================================
+[2026-01-21 11:59:37] [INFO] 
+Proceed with deleting all tracked resources? (yes/no) [2026-01-21 11:59:51] [INFO] Cleanup confirmed. Proceeding...
+[33m[2026-01-21 11:59:51] [WARN] Deleting Key Pair: automation-lab-key-1768996751[0m
+[33m[2026-01-21 11:59:53] [WARN] Deleting keypair: automation-lab-key-1768996751[0m
+{
+    "Return": true
+}
+[2026-01-21 11:59:59] [INFO] ✓ Key pair deleted: automation-lab-key-1768996751
+[33m[2026-01-21 11:59:59] [WARN] Deleting Security Group: sg-0f4b695dc111dda9a[0m
+[33m[2026-01-21 12:00:00] [WARN] Deleting security group: sg-0f4b695dc111dda9a[0m
+[2026-01-21 12:00:08] [INFO] ✓ Security group deleted: sg-0f4b695dc111dda9a
+[33m[2026-01-21 12:00:08] [WARN] Deleting S3 Bucket: automation-lab-bucket-1768996670-sage[0m
+[2026-01-21 12:00:16] [INFO] ✓ Bucket deleted: automation-lab-bucket-1768996670-sage
+[2026-01-21 12:00:20] [INFO] ==========================================
+[2026-01-21 12:00:20] [INFO] Cleanup Complete!
+[2026-01-21 12:00:20] [INFO] ==========================================

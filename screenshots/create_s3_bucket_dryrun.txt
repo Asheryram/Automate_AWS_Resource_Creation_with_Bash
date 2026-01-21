@@ -1,0 +1,21 @@
+[2026-01-21 11:42:19] [INFO] ==========================================
+[2026-01-21 11:42:19] [INFO] S3 Bucket Creation via State Manager
+[33m[2026-01-21 11:42:19] [WARN] DRY-RUN MODE ENABLED[0m
+[2026-01-21 11:42:19] [INFO] ==========================================
+[35m[2026-01-21 11:42:21] [DRYRUN] ==================== DRY-RUN ====================[0m
+[35m[2026-01-21 11:42:21] [DRYRUN] Resources that will be created:[0m
+[35m[2026-01-21 11:42:21] [DRYRUN] [0m
+[35m[2026-01-21 11:42:21] [DRYRUN] S3 Bucket:[0m
+[35m[2026-01-21 11:42:21] [DRYRUN]   Name:        automation-lab-bucket-1768995739-sage[0m
+[35m[2026-01-21 11:42:21] [DRYRUN]   Region:      eu-central-1[0m
+[35m[2026-01-21 11:42:21] [DRYRUN]   Versioning:  Enabled[0m
+[35m[2026-01-21 11:42:21] [DRYRUN]   Tags:[0m
+[35m[2026-01-21 11:42:21] [DRYRUN]     - Project:     AutomationLab[0m
+[35m[2026-01-21 11:42:21] [DRYRUN]     - Environment: Development[0m
+[35m[2026-01-21 11:42:21] [DRYRUN] [0m
+[35m[2026-01-21 11:42:21] [DRYRUN] Sample File:[0m
+[35m[2026-01-21 11:42:21] [DRYRUN]   Filename: welcome.txt[0m
+[35m[2026-01-21 11:42:21] [DRYRUN]   Location: s3://automation-lab-bucket-1768995739-sage/welcome.txt[0m
+[35m[2026-01-21 11:42:21] [DRYRUN] [0m
+[35m[2026-01-21 11:42:21] [DRYRUN] ==================================================[0m
+[35m[2026-01-21 11:42:21] [DRYRUN] No resources will be created in dry-run mode.[0m

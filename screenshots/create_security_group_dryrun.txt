@@ -1,0 +1,30 @@
+[2026-01-21 11:42:22] [INFO] ==========================================
+[2026-01-21 11:42:22] [INFO] Security Group Creation Script Started
+[33m[2026-01-21 11:42:22] [WARN] DRY-RUN MODE: No changes will be made[0m
+[2026-01-21 11:42:22] [INFO] ==========================================
+
+Enter CIDR block for SSH access (port 22) (e.g., 203.0.113.0/24 or 0.0.0.0/0 for anywhere): [2026-01-21 11:42:40] [INFO] SSH CIDR set to: 0.0.0.0/0
+
+Enter CIDR block for HTTP access (port 80) (e.g., 203.0.113.0/24 or 0.0.0.0/0 for anywhere): [2026-01-21 11:42:43] [INFO] HTTP CIDR set to: 0.0.0.0/0
+[35m[2026-01-21 11:42:55] [DRYRUN] [0m
+[35m[2026-01-21 11:42:55] [DRYRUN] ==================== DRY-RUN ====================[0m
+[35m[2026-01-21 11:42:55] [DRYRUN] Resources that will be created:[0m
+[35m[2026-01-21 11:42:55] [DRYRUN] [0m
+[35m[2026-01-21 11:42:55] [DRYRUN] Security Group:[0m
+[35m[2026-01-21 11:42:55] [DRYRUN]   Name: devops-sg[0m
+[35m[2026-01-21 11:42:55] [DRYRUN]   Region: eu-central-1[0m
+[35m[2026-01-21 11:42:55] [DRYRUN] [0m
+[35m[2026-01-21 11:42:55] [DRYRUN] Ingress Rules:[0m
+[35m[2026-01-21 11:42:55] [DRYRUN]   - Protocol: TCP[0m
+[35m[2026-01-21 11:42:55] [DRYRUN]     Port: 22 (SSH)[0m
+[35m[2026-01-21 11:42:55] [DRYRUN]     CIDR: 0.0.0.0/0[0m
+[35m[2026-01-21 11:42:55] [DRYRUN]   - Protocol: TCP[0m
+[35m[2026-01-21 11:42:55] [DRYRUN]     Port: 80 (HTTP)[0m
+[35m[2026-01-21 11:42:55] [DRYRUN]     CIDR: 0.0.0.0/0[0m
+[35m[2026-01-21 11:42:55] [DRYRUN] [0m
+[35m[2026-01-21 11:42:55] [DRYRUN] State Tracking:[0m
+[35m[2026-01-21 11:42:55] [DRYRUN]   Local State:  ./state.json[0m
+[35m[2026-01-21 11:42:55] [DRYRUN]   Remote State: s3://aws-project-state/state.json[0m
+[35m[2026-01-21 11:42:55] [DRYRUN] [0m
+[35m[2026-01-21 11:42:55] [DRYRUN] ==================================================[0m
+[35m[2026-01-21 11:42:55] [DRYRUN] No resources will be created in dry-run mode.[0m

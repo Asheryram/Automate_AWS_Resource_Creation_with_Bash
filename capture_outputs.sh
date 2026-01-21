@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# capture_outputs.sh
+# Run scripts in dry-run mode and save their terminal outputs to files
+
+OUT_DIR="$(pwd)/screenshots"
+mkdir -p "$OUT_DIR"
+
+echo "Capturing outputs to $OUT_DIR"
+
+# Mode: dry (default) or real
+MODE="dry"
+if [[ ${1:-} == "real" ]]; then
+	MODE="real"
+fi
+
+echo "Capturing outputs to $OUT_DIR (mode: $MODE)"
+
+if [[ "$MODE" == "real" ]]; then
+	echo "WARNING: running in real mode will create/delete AWS resources and may incur charges."
+	read -rp "Proceed with REAL execution? (yes/no) " CONFIRM_REAL
+	[[ "$CONFIRM_REAL" == "yes" ]] || { echo "Aborting real run."; exit 0; }
+fi
+
+# Helper to run a command, save output file with mode suffix
+run_and_save() {
+	local cmd="$1" file="$2"
+	if [[ "$MODE" == "dry" ]]; then
+		(eval "$cmd" --dry-run) 2>&1 | tee "$OUT_DIR/${file}_dryrun.txt" || true
+	else
+		(eval "$cmd") 2>&1 | tee "$OUT_DIR/${file}_real.txt" || true
+	fi
+}
+
+run_and_save "./create_s3_bucket.sh" "create_s3_bucket"
+run_and_save "./create_security_group.sh" "create_security_group"
+run_and_save "./create_ec2.sh" "create_ec2"
+run_and_save "./cleanup_resources.sh" "cleanup_resources"
+
+echo "Saved outputs to:"
+ls -1 "$OUT_DIR"/*.txt || true
+
+echo "Next: run ./generate_images.sh to convert .txt files to PNG images (requires ImageMagick)."
