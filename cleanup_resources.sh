@@ -11,7 +11,10 @@ set -euo pipefail
 # =========================
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/logger.sh"
-source "${SCRIPT_DIR}/lib/common.sh"
+source "${SCRIPT_DIR}/lib/args.sh"
+source "${SCRIPT_DIR}/lib/checks.sh"
+source "${SCRIPT_DIR}/lib/output.sh"
+source "${SCRIPT_DIR}/lib/state.sh"
 source "${SCRIPT_DIR}/state/state_manager.sh"
 
 # =========================
