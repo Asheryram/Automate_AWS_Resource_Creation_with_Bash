@@ -16,14 +16,17 @@ source "${SCRIPT_DIR}/lib/args.sh"
 source "${SCRIPT_DIR}/lib/checks.sh"
 source "${SCRIPT_DIR}/lib/output.sh"
 source "${SCRIPT_DIR}/lib/state.sh"
-source "${SCRIPT_DIR}/state/state_manager.sh"
 
 # ------------------------------------------------
-# Args & Guards
+# Args & Guards (BEFORE state_manager!)
 # ------------------------------------------------
 parse_dry_run_flag "$@"
 check_dependencies "aws" "jq"
 check_aws_credentials
+check_aws_region "${AWS_REGION:-}"
+
+# Now safe to source state_manager
+source "${SCRIPT_DIR}/state/state_manager.sh"
 
 # ------------------------------------------------
 # Config

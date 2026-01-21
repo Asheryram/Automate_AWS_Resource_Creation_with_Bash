@@ -13,11 +13,14 @@ source "${SCRIPT_DIR}/lib/checks.sh"
 source "${SCRIPT_DIR}/lib/prompts.sh"
 source "${SCRIPT_DIR}/lib/output.sh"
 source "${SCRIPT_DIR}/lib/state.sh"
-source "${SCRIPT_DIR}/state/state_manager.sh"
 
-# Parse arguments & check dependencies
+# Parse arguments & check dependencies (BEFORE state_manager!)
 parse_dry_run_flag "$@"
 check_dependencies "aws" "jq"
+check_aws_region "${AWS_REGION:-}"
+
+# Now safe to source state_manager
+source "${SCRIPT_DIR}/state/state_manager.sh"
 
 # Configuration
 SG_NAME="devops-sg"

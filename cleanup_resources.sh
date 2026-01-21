@@ -15,13 +15,17 @@ source "${SCRIPT_DIR}/lib/args.sh"
 source "${SCRIPT_DIR}/lib/checks.sh"
 source "${SCRIPT_DIR}/lib/output.sh"
 source "${SCRIPT_DIR}/lib/state.sh"
-source "${SCRIPT_DIR}/state/state_manager.sh"
 
 # =========================
-# Parse CLI arguments & check dependencies
+# Parse CLI arguments & check dependencies (BEFORE state_manager!)
 # =========================
 parse_dry_run_flag "$@"
 check_dependencies "aws" "jq"
+check_aws_credentials
+check_aws_region "${AWS_REGION:-}"
+
+# Now safe to source state_manager (uses validated AWS_REGION)
+source "${SCRIPT_DIR}/state/state_manager.sh"
 
 print_header "AWS Resources Cleanup Script"
 [[ "$DRY_RUN" == "true" ]] && print_dry_run_notice
