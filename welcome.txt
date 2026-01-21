@@ -1,0 +1,5 @@
+Welcome to the Automation Lab!
+Created: Wed Jan 21 10:20:33 GMT 2026
+Bucket: automation-lab-bucket-1768990819-sage
+Region: eu-central-1
+User: sage

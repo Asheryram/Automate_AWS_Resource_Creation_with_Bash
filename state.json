@@ -1,0 +1,10 @@
+{
+  "project": "aws-project",
+  "region": "eu-central-1",
+  "resources": {
+    "ec2": {},
+    "security_group": {},
+    "keypair": {},
+    "s3": {}
+  }
+}

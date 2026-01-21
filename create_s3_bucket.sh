@@ -59,12 +59,23 @@ aws sts get-caller-identity >/dev/null || { log_error "AWS credentials missing";
 # Dry-run summary
 # ------------------------------------------------
 if [[ "$DRY_RUN" == "true" ]]; then
-  log_dryrun "Planned actions:"
-  log_dryrun "1. Create S3 bucket: ${BUCKET_NAME}"
-  log_dryrun "2. Enable versioning"
-  log_dryrun "3. Add tags (Project, Environment)"
-  log_dryrun "4. Upload sample file"
-  log_dryrun "5. Track bucket in remote state"
+  log_dryrun "==================== DRY-RUN ===================="
+  log_dryrun "Resources that will be created:"
+  log_dryrun ""
+  log_dryrun "S3 Bucket:"
+  log_dryrun "  Name:        $BUCKET_NAME"
+  log_dryrun "  Region:      $REGION"
+  log_dryrun "  Versioning:  Enabled"
+  log_dryrun "  Tags:"
+  log_dryrun "    - Project:     AutomationLab"
+  log_dryrun "    - Environment: Development"
+  log_dryrun ""
+  log_dryrun "Sample File:"
+  log_dryrun "  Filename: $SAMPLE_FILE"
+  log_dryrun "  Location: s3://${BUCKET_NAME}/${SAMPLE_FILE}"
+  log_dryrun ""
+  log_dryrun "=================================================="
+  log_dryrun "No resources will be created in dry-run mode."
   exit 0
 fi
 
@@ -72,6 +83,7 @@ fi
 # State init
 # ------------------------------------------------
 state_init
+state_pull
 
 # ------------------------------------------------
 # Step 1: Create bucket

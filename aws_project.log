@@ -152,3 +152,817 @@
 [2026-01-21 08:32:05] [INFO] ==========================================
 [2026-01-21 08:32:05] [INFO] No actual resources deleted in dry-run mode
 [2026-01-21 08:51:10] [ERROR] jq is required for state operations
+[2026-01-21 09:11:30] [INFO] ==========================================
+[2026-01-21 09:11:30] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:11:30] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:11:30] [INFO] ==========================================
+[2026-01-21 09:11:32] [INFO] Initializing remote state
+[2026-01-21 09:14:18] [INFO] ==========================================
+[2026-01-21 09:14:18] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:14:18] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:14:18] [INFO] ==========================================
+[2026-01-21 09:14:19] [WARN] State bucket 'aws-project-state' does not exist. Creating it...
+[2026-01-21 09:14:21] [INFO] Bucket 'aws-project-state' created successfully
+[2026-01-21 09:14:22] [INFO] Initializing remote state
+[2026-01-21 09:14:24] [INFO] Remote state initialized at s3://aws-project-state/state.json
+[2026-01-21 09:14:27] [INFO] 
+[2026-01-21 09:14:27] [INFO] DRY-RUN SUMMARY
+[2026-01-21 09:14:27] [INFO] ==========================================
+[2026-01-21 09:14:27] [INFO] Resources tracked in state.json that would be deleted:
+[2026-01-21 09:14:33] [INFO] EC2 Instances: {     "BucketArn": "arn:aws:s3:::aws-project-state",     "BucketRegion": "eu-central-1",     "AccessPointAlias": false } 
+[2026-01-21 09:14:36] [INFO] Key Pairs: {     "BucketArn": "arn:aws:s3:::aws-project-state",     "BucketRegion": "eu-central-1",     "AccessPointAlias": false } 
+[2026-01-21 09:14:39] [INFO] Security Groups: {     "BucketArn": "arn:aws:s3:::aws-project-state",     "BucketRegion": "eu-central-1",     "AccessPointAlias": false } 
+[2026-01-21 09:14:42] [INFO] S3 Buckets: {     "BucketArn": "arn:aws:s3:::aws-project-state",     "BucketRegion": "eu-central-1",     "AccessPointAlias": false } 
+[2026-01-21 09:14:42] [INFO] ==========================================
+[2026-01-21 09:18:46] [INFO] ==========================================
+[2026-01-21 09:18:46] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:18:46] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:18:46] [INFO] ==========================================
+[2026-01-21 09:23:53] [INFO] ==========================================
+[2026-01-21 09:23:53] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:23:53] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:23:53] [INFO] ==========================================
+[2026-01-21 09:25:27] [INFO] ==========================================
+[2026-01-21 09:25:27] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:25:27] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:25:27] [INFO] ==========================================
+[2026-01-21 09:27:33] [INFO] ==========================================
+[2026-01-21 09:27:33] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:27:33] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:27:33] [INFO] ==========================================
+[2026-01-21 09:31:44] [INFO] ==========================================
+[2026-01-21 09:31:44] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:31:44] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:31:44] [INFO] ==========================================
+[2026-01-21 09:34:52] [INFO] ==========================================
+[2026-01-21 09:34:52] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:34:52] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:34:52] [INFO] ==========================================
+[2026-01-21 09:35:05] [INFO] ==========================================
+[2026-01-21 09:35:05] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:35:05] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:35:05] [INFO] ==========================================
+[2026-01-21 09:36:38] [INFO] ==========================================
+[2026-01-21 09:36:38] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:36:38] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:36:38] [INFO] ==========================================
+[2026-01-21 09:37:50] [INFO] ==========================================
+[2026-01-21 09:37:50] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:37:50] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:37:50] [INFO] ==========================================
+[2026-01-21 09:38:01] [INFO] 
+[2026-01-21 09:38:01] [INFO] ==========================================
+[2026-01-21 09:38:01] [INFO] DRY-RUN SUMMARY
+[2026-01-21 09:38:01] [INFO] ==========================================
+[2026-01-21 09:38:01] [INFO] Resources tracked in remote state.json that would be deleted:
+[2026-01-21 09:38:01] [INFO] EC2 Instances:
+[2026-01-21 09:38:01] [INFO]   None
+[2026-01-21 09:38:01] [INFO] Key Pairs:
+[2026-01-21 09:38:01] [INFO]   None
+[2026-01-21 09:38:01] [INFO] Security Groups:
+[2026-01-21 09:38:01] [INFO]   None
+[2026-01-21 09:38:01] [INFO] S3 Buckets:
+[2026-01-21 09:38:01] [INFO]   None
+[2026-01-21 09:38:01] [INFO] ==========================================
+[2026-01-21 09:38:01] [INFO] No resources will be deleted in dry-run mode
+[2026-01-21 09:40:03] [INFO] ==========================================
+[2026-01-21 09:40:03] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:40:03] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:40:03] [INFO] ==========================================
+[2026-01-21 09:40:12] [INFO] 
+[2026-01-21 09:40:12] [INFO] ==========================================
+[2026-01-21 09:40:12] [INFO] DRY-RUN SUMMARY
+[2026-01-21 09:40:12] [INFO] ==========================================
+[2026-01-21 09:40:12] [INFO] Resources tracked in remote state.json that would be deleted:
+[2026-01-21 09:40:12] [INFO] EC2 Instances:
+[2026-01-21 09:40:12] [INFO]   None
+[2026-01-21 09:40:12] [INFO] Key Pairs:
+[2026-01-21 09:40:12] [INFO]   None
+[2026-01-21 09:40:12] [INFO] Security Groups:
+[2026-01-21 09:40:12] [INFO]   None
+[2026-01-21 09:40:12] [INFO] S3 Buckets:
+[2026-01-21 09:40:12] [INFO]   None
+[2026-01-21 09:40:12] [INFO] ==========================================
+[2026-01-21 09:40:12] [INFO] No resources will be deleted in dry-run mode
+[2026-01-21 09:41:12] [INFO] ==========================================
+[2026-01-21 09:41:12] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:41:12] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:41:12] [INFO] ==========================================
+[2026-01-21 09:41:23] [INFO] 
+[2026-01-21 09:41:23] [INFO] ==========================================
+[2026-01-21 09:41:23] [INFO] DRY-RUN SUMMARY
+[2026-01-21 09:41:23] [INFO] ==========================================
+[2026-01-21 09:41:23] [INFO] Resources tracked in remote state.json that would be deleted:
+[2026-01-21 09:41:23] [INFO] EC2 Instances:
+[2026-01-21 09:41:23] [INFO]   None
+[2026-01-21 09:41:23] [INFO] Key Pairs:
+[2026-01-21 09:41:23] [INFO]   None
+[2026-01-21 09:41:23] [INFO] Security Groups:
+[2026-01-21 09:41:23] [INFO]   None
+[2026-01-21 09:41:23] [INFO] S3 Buckets:
+[2026-01-21 09:41:23] [INFO]   None
+[2026-01-21 09:41:23] [INFO] ==========================================
+[2026-01-21 09:41:23] [INFO] No resources will be deleted in dry-run mode
+[2026-01-21 09:42:38] [INFO] ==========================================
+[2026-01-21 09:42:38] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 09:42:38] [DRYRUN] DRY-RUN MODE: No changes will be made
+[2026-01-21 09:42:38] [INFO] ==========================================
+[2026-01-21 09:42:57] [DRYRUN] 
+[2026-01-21 09:42:57] [DRYRUN] ==========================================
+[2026-01-21 09:42:57] [DRYRUN] DRY-RUN SUMMARY
+[2026-01-21 09:42:57] [DRYRUN] ==========================================
+[2026-01-21 09:42:57] [DRYRUN] Resources tracked in remote state.json that would be deleted:
+[2026-01-21 09:42:57] [DRYRUN] EC2 Instances:
+[2026-01-21 09:42:57] [DRYRUN]   None
+[2026-01-21 09:42:57] [DRYRUN] Key Pairs:
+[2026-01-21 09:42:57] [DRYRUN]   None
+[2026-01-21 09:42:57] [DRYRUN] Security Groups:
+[2026-01-21 09:42:57] [DRYRUN]   None
+[2026-01-21 09:42:57] [DRYRUN] S3 Buckets:
+[2026-01-21 09:42:57] [DRYRUN]   None
+[2026-01-21 09:42:57] [DRYRUN] ==========================================
+[2026-01-21 09:42:57] [DRYRUN] No resources will be deleted in dry-run mode
+[2026-01-21 09:43:57] [INFO] ==========================================
+[2026-01-21 09:43:57] [INFO] EC2 Creation via State Manager
+[2026-01-21 09:43:57] [WARN] DRY-RUN MODE ENABLED
+[2026-01-21 09:43:57] [INFO] ==========================================
+[2026-01-21 09:43:59] [DRYRUN] Planned actions:
+[2026-01-21 09:43:59] [DRYRUN] 1. Initialize remote state (S3)
+[2026-01-21 09:43:59] [DRYRUN] 2. Resolve latest Amazon Linux 2 AMI
+[2026-01-21 09:43:59] [DRYRUN] 3. Create security group: devops-sg
+[2026-01-21 09:43:59] [DRYRUN] 4. Create key pair
+[2026-01-21 09:43:59] [DRYRUN] 5. Launch EC2 instance
+[2026-01-21 09:43:59] [DRYRUN] 6. Persist all resource IDs in remote state
+[2026-01-21 09:47:35] [INFO] ==========================================
+[2026-01-21 09:47:35] [INFO] EC2 Creation via State Manager
+[2026-01-21 09:47:35] [WARN] DRY-RUN MODE ENABLED
+[2026-01-21 09:47:35] [INFO] ==========================================
+[2026-01-21 09:47:37] [DRYRUN] ==================== DRY-RUN ====================
+[2026-01-21 09:47:37] [DRYRUN] The script will perform the following actions:
+[2026-01-21 09:47:37] [DRYRUN] 1️⃣ Resolve AMI:
+[2026-01-21 09:47:39] [DRYRUN]    AMI ID: ami-05000e6b0662e03c0
+[2026-01-21 09:49:10] [INFO] ==========================================
+[2026-01-21 09:49:10] [INFO] EC2 Creation via State Manager
+[2026-01-21 09:49:10] [WARN] DRY-RUN MODE ENABLED
+[2026-01-21 09:49:10] [INFO] ==========================================
+[2026-01-21 09:49:12] [DRYRUN] ==================== DRY-RUN ====================
+[2026-01-21 09:49:12] [DRYRUN] The script will perform the following actions:
+[2026-01-21 09:49:12] [DRYRUN] 1️⃣ Resolve AMI:
+[2026-01-21 09:49:14] [DRYRUN]    AMI ID: ami-05000e6b0662e03c0
+[2026-01-21 09:49:20] [DRYRUN] 2️⃣ Security Group:
+[2026-01-21 09:49:20] [DRYRUN]    None exist yet (new SG will be created) -> (known after apply)
+[2026-01-21 09:49:23] [DRYRUN] 3️⃣ Key Pair:
+[2026-01-21 09:49:23] [DRYRUN]    No key pairs yet -> (known after apply)
+[2026-01-21 09:49:26] [DRYRUN] 4️⃣ EC2 Instance:
+[2026-01-21 09:49:26] [DRYRUN]    No EC2 instances yet -> (known after apply)
+[2026-01-21 09:49:26] [DRYRUN] ==================================================
+[2026-01-21 09:49:26] [DRYRUN] No resources will be created or modified in dry-run mode.
+[2026-01-21 09:50:19] [INFO] ==========================================
+[2026-01-21 09:50:19] [INFO] EC2 Creation via State Manager
+[2026-01-21 09:50:19] [WARN] DRY-RUN MODE ENABLED
+[2026-01-21 09:50:19] [INFO] ==========================================
+[2026-01-21 09:50:21] [DRYRUN] ==================== DRY-RUN ====================
+[2026-01-21 09:50:21] [DRYRUN] The script will perform the following actions:
+[2026-01-21 09:50:21] [DRYRUN] 1️ Resolve AMI:
+[2026-01-21 09:50:23] [DRYRUN]    AMI ID: ami-05000e6b0662e03c0
+[2026-01-21 09:50:29] [DRYRUN] 2️ Security Group:
+[2026-01-21 09:50:29] [DRYRUN]    None exist yet (new SG will be created) -> (known after apply)
+[2026-01-21 09:50:32] [DRYRUN] 3️ Key Pair:
+[2026-01-21 09:50:32] [DRYRUN]    No key pairs yet -> (known after apply)
+[2026-01-21 09:50:36] [DRYRUN] 4️ EC2 Instance:
+[2026-01-21 09:50:36] [DRYRUN]    No EC2 instances yet -> (known after apply)
+[2026-01-21 09:50:36] [DRYRUN] ==================================================
+[2026-01-21 09:50:36] [DRYRUN] No resources will be created or modified in dry-run mode.
+[2026-01-21 09:52:04] [INFO] ==========================================
+[2026-01-21 09:52:04] [INFO] EC2 Creation via State Manager
+[2026-01-21 09:52:04] [WARN] DRY-RUN MODE ENABLED
+[2026-01-21 09:52:04] [INFO] ==========================================
+[2026-01-21 09:52:06] [DRYRUN] ==================== DRY-RUN ====================
+[2026-01-21 09:52:06] [DRYRUN] The script will perform the following actions:
+[2026-01-21 09:52:06] [DRYRUN] 1️⃣ Resolve AMI:
+[2026-01-21 09:52:08] [DRYRUN]    AMI ID: ami-05000e6b0662e03c0
+[2026-01-21 09:52:08] [DRYRUN] 2️⃣ Security Groups:
+[2026-01-21 09:52:11] [DRYRUN]    None exist yet -> (known after apply)
+[2026-01-21 09:52:11] [DRYRUN] 3️⃣ Key Pairs:
+[2026-01-21 09:52:11] [DRYRUN]    No key pairs yet -> (known after apply)
+[2026-01-21 09:52:11] [DRYRUN] 4️⃣ EC2 Instances:
+[2026-01-21 09:52:11] [DRYRUN]    No EC2 instances yet -> (known after apply)
+[2026-01-21 09:52:11] [DRYRUN] ==================================================
+[2026-01-21 09:52:11] [DRYRUN] No resources will be created or modified in dry-run mode.
+[2026-01-21 09:52:53] [INFO] ==========================================
+[2026-01-21 09:52:53] [INFO] EC2 Creation via State Manager
+[2026-01-21 09:52:53] [WARN] DRY-RUN MODE ENABLED
+[2026-01-21 09:52:53] [INFO] ==========================================
+[2026-01-21 09:52:54] [DRYRUN] ==================== DRY-RUN ====================
+[2026-01-21 09:52:54] [DRYRUN] The script will perform the following actions:
+[2026-01-21 09:52:54] [DRYRUN] 1️⃣ Resolve AMI:
+[2026-01-21 09:52:56] [DRYRUN]    AMI ID: ami-05000e6b0662e03c0
+[2026-01-21 09:52:56] [DRYRUN] 2️⃣ Security Groups:
+[2026-01-21 09:52:56] [DRYRUN]    None exist yet -> (known after apply)
+[2026-01-21 09:52:56] [DRYRUN] 3️⃣ Key Pairs:
+[2026-01-21 09:52:57] [DRYRUN]    No key pairs yet -> (known after apply)
+[2026-01-21 09:52:57] [DRYRUN] 4️⃣ EC2 Instances:
+[2026-01-21 09:52:57] [DRYRUN]    No EC2 instances yet -> (known after apply)
+[2026-01-21 09:52:57] [DRYRUN] ==================================================
+[2026-01-21 09:52:57] [DRYRUN] No resources will be created or modified in dry-run mode.
+[2026-01-21 09:58:41] [INFO] ==========================================
+[2026-01-21 09:58:41] [INFO] EC2 Creation via State Manager
+[2026-01-21 09:58:41] [WARN] DRY-RUN MODE ENABLED
+[2026-01-21 09:58:41] [INFO] ==========================================
+[2026-01-21 09:58:48] [DRYRUN] ==================== DRY-RUN ====================
+[2026-01-21 09:58:48] [DRYRUN] The script will perform the following actions:
+[2026-01-21 09:58:48] [DRYRUN] 1️⃣ Resolve AMI:
+[2026-01-21 09:58:50] [DRYRUN]    AMI ID: ami-05000e6b0662e03c0
+[2026-01-21 09:58:53] [DRYRUN] 2️⃣ Security Groups:
+[2026-01-21 09:58:53] [DRYRUN]    None exist yet -> (will be created) (known after apply)
+[2026-01-21 09:58:56] [DRYRUN] 3️⃣ Key Pairs:
+[2026-01-21 09:58:56] [DRYRUN]    No key pairs yet -> (will be created) (known after apply)
+[2026-01-21 09:58:59] [DRYRUN] 4️⃣ EC2 Instances:
+[2026-01-21 09:58:59] [DRYRUN]    No EC2 instances yet -> (will be created) (known after apply)
+[2026-01-21 09:58:59] [DRYRUN] ==================================================
+[2026-01-21 09:58:59] [DRYRUN] No resources will be created or modified in dry-run mode.
+[2026-01-21 10:00:00] [INFO] ==========================================
+[2026-01-21 10:00:00] [INFO] EC2 Creation via State Manager
+[2026-01-21 10:00:00] [WARN] DRY-RUN MODE ENABLED
+[2026-01-21 10:00:00] [INFO] ==========================================
+[2026-01-21 10:00:07] [DRYRUN] ==================== DRY-RUN ====================
+[2026-01-21 10:00:07] [DRYRUN] The script will perform the following actions:
+[2026-01-21 10:00:07] [DRYRUN] 1️⃣ Resolve AMI:
+[2026-01-21 10:00:09] [DRYRUN]    AMI ID: ami-05000e6b0662e03c0
+[2026-01-21 10:00:15] [DRYRUN] 2️⃣ Security Groups:
+[2026-01-21 10:00:15] [DRYRUN]    None exist yet -> (will be created) (known after apply)
+[2026-01-21 10:00:19] [DRYRUN] 3️⃣ Key Pairs:
+[2026-01-21 10:00:19] [DRYRUN]    No key pairs yet -> (will be created) (known after apply)
+[2026-01-21 10:00:22] [DRYRUN] 4️⃣ EC2 Instances:
+[2026-01-21 10:00:22] [DRYRUN]    Region: eu-central-1
+[2026-01-21 10:00:22] [DRYRUN]    Instance Type: t2.micro
+[2026-01-21 10:00:22] [DRYRUN]    Tags: Project=AutomationLab
+[2026-01-21 10:00:22] [DRYRUN]    New instance will be created with above configuration (ID: known after apply)
+[2026-01-21 10:00:22] [DRYRUN] ==================================================
+[2026-01-21 10:00:22] [DRYRUN] No resources will be created or modified in dry-run mode.
+[2026-01-21 10:01:53] [INFO] ==========================================
+[2026-01-21 10:01:53] [INFO] S3 Bucket Creation via State Manager
+[2026-01-21 10:01:53] [WARN] DRY-RUN MODE ENABLED
+[2026-01-21 10:01:53] [INFO] ==========================================
+[2026-01-21 10:01:54] [DRYRUN] ==================== DRY-RUN ====================
+[2026-01-21 10:01:54] [DRYRUN] The script will perform the following actions:
+[2026-01-21 10:01:54] [DRYRUN] 
+[2026-01-21 10:01:54] [DRYRUN] 1️⃣ Create S3 Bucket
+[2026-01-21 10:01:54] [DRYRUN]    Bucket Name: automation-lab-bucket-1768989713-sage
+[2026-01-21 10:01:54] [DRYRUN]    Region: eu-central-1
+[2026-01-21 10:01:54] [DRYRUN] 
+[2026-01-21 10:01:54] [DRYRUN] 2️⃣ Enable Versioning
+[2026-01-21 10:01:54] [DRYRUN]    Status: Enabled
+[2026-01-21 10:01:54] [DRYRUN] 
+[2026-01-21 10:01:54] [DRYRUN] 3️⃣ Add Tags
+[2026-01-21 10:01:54] [DRYRUN]    - Project: AutomationLab
+[2026-01-21 10:01:54] [DRYRUN]    - Environment: Development
+[2026-01-21 10:01:54] [DRYRUN] 
+[2026-01-21 10:01:54] [DRYRUN] 4️⃣ Upload Sample File
+[2026-01-21 10:01:54] [DRYRUN]    File: welcome.txt
+[2026-01-21 10:01:54] [DRYRUN]    Destination: s3://automation-lab-bucket-1768989713-sage/welcome.txt
+[2026-01-21 10:01:54] [DRYRUN]    Content: Welcome message with metadata
+[2026-01-21 10:01:54] [DRYRUN] 
+[2026-01-21 10:01:54] [DRYRUN] 5️⃣ Track in Remote State
+[2026-01-21 10:01:54] [DRYRUN]    State File: ./state.json
+[2026-01-21 10:01:54] [DRYRUN]    S3 Location: s3://aws-project-state/state.json
+[2026-01-21 10:01:54] [DRYRUN] 
+[2026-01-21 10:01:54] [DRYRUN] ==================================================
+[2026-01-21 10:01:54] [DRYRUN] No resources will be created or modified in dry-run mode.
+[2026-01-21 10:03:12] [INFO] ==========================================
+[2026-01-21 10:03:12] [INFO] S3 Bucket Creation via State Manager
+[2026-01-21 10:03:12] [WARN] DRY-RUN MODE ENABLED
+[2026-01-21 10:03:12] [INFO] ==========================================
+[2026-01-21 10:03:13] [DRYRUN] ==================== DRY-RUN ====================
+[2026-01-21 10:03:13] [DRYRUN] Resources that will be created:
+[2026-01-21 10:03:13] [DRYRUN] 
+[2026-01-21 10:03:14] [DRYRUN] S3 Bucket:
+[2026-01-21 10:03:14] [DRYRUN]   Name:        automation-lab-bucket-1768989792-sage
+[2026-01-21 10:03:14] [DRYRUN]   Region:      eu-central-1
+[2026-01-21 10:03:14] [DRYRUN]   Versioning:  Enabled
+[2026-01-21 10:03:14] [DRYRUN]   Tags:
+[2026-01-21 10:03:14] [DRYRUN]     - Project:     AutomationLab
+[2026-01-21 10:03:14] [DRYRUN]     - Environment: Development
+[2026-01-21 10:03:14] [DRYRUN] 
+[2026-01-21 10:03:14] [DRYRUN] Sample File:
+[2026-01-21 10:03:14] [DRYRUN]   Filename: welcome.txt
+[2026-01-21 10:03:14] [DRYRUN]   Location: s3://automation-lab-bucket-1768989792-sage/welcome.txt
+[2026-01-21 10:03:14] [DRYRUN] 
+[2026-01-21 10:03:14] [DRYRUN] State Tracking:
+[2026-01-21 10:03:14] [DRYRUN]   Local State:  ./state.json
+[2026-01-21 10:03:14] [DRYRUN]   Remote State: s3://aws-project-state/state.json
+[2026-01-21 10:03:14] [DRYRUN] 
+[2026-01-21 10:03:14] [DRYRUN] ==================================================
+[2026-01-21 10:03:14] [DRYRUN] No resources will be created in dry-run mode.
+[2026-01-21 10:03:46] [INFO] ==========================================
+[2026-01-21 10:03:46] [INFO] S3 Bucket Creation via State Manager
+[2026-01-21 10:03:46] [WARN] DRY-RUN MODE ENABLED
+[2026-01-21 10:03:46] [INFO] ==========================================
+[2026-01-21 10:03:48] [DRYRUN] ==================== DRY-RUN ====================
+[2026-01-21 10:03:48] [DRYRUN] Resources that will be created:
+[2026-01-21 10:03:48] [DRYRUN] 
+[2026-01-21 10:03:48] [DRYRUN] S3 Bucket:
+[2026-01-21 10:03:48] [DRYRUN]   Name:        automation-lab-bucket-1768989826-sage
+[2026-01-21 10:03:48] [DRYRUN]   Region:      eu-central-1
+[2026-01-21 10:03:48] [DRYRUN]   Versioning:  Enabled
+[2026-01-21 10:03:48] [DRYRUN]   Tags:
+[2026-01-21 10:03:48] [DRYRUN]     - Project:     AutomationLab
+[2026-01-21 10:03:48] [DRYRUN]     - Environment: Development
+[2026-01-21 10:03:48] [DRYRUN] 
+[2026-01-21 10:03:48] [DRYRUN] Sample File:
+[2026-01-21 10:03:48] [DRYRUN]   Filename: welcome.txt
+[2026-01-21 10:03:48] [DRYRUN]   Location: s3://automation-lab-bucket-1768989826-sage/welcome.txt
+[2026-01-21 10:03:48] [DRYRUN] 
+[2026-01-21 10:03:48] [DRYRUN] ==================================================
+[2026-01-21 10:03:48] [DRYRUN] No resources will be created in dry-run mode.
+[2026-01-21 10:04:28] [INFO] ==========================================
+[2026-01-21 10:04:28] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:04:28] [INFO] ==========================================
+[2026-01-21 10:04:48] [INFO] Cleanup confirmed. Proceeding...
+[2026-01-21 10:04:48] [INFO] ==========================================
+[2026-01-21 10:04:48] [INFO] Cleanup Complete!
+[2026-01-21 10:04:48] [INFO] ==========================================
+[2026-01-21 10:06:49] [INFO] ==========================================
+[2026-01-21 10:06:49] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:06:49] [INFO] ==========================================
+[2026-01-21 10:07:00] [INFO] 
+[2026-01-21 10:07:00] [INFO] ==========================================
+[2026-01-21 10:07:00] [INFO] RESOURCES TO BE DELETED
+[2026-01-21 10:07:00] [INFO] ==========================================
+[2026-01-21 10:07:00] [INFO] EC2 Instances:
+[2026-01-21 10:07:00] [INFO]   None
+[2026-01-21 10:07:00] [INFO] Key Pairs:
+[2026-01-21 10:07:00] [INFO]   None
+[2026-01-21 10:07:00] [INFO] Security Groups:
+[2026-01-21 10:07:00] [INFO]   None
+[2026-01-21 10:07:00] [INFO] S3 Buckets:
+[2026-01-21 10:07:00] [INFO]   None
+[2026-01-21 10:07:00] [INFO] ==========================================
+[2026-01-21 10:07:00] [INFO] 
+[2026-01-21 10:07:24] [INFO] Cleanup confirmed. Proceeding...
+[2026-01-21 10:07:24] [INFO] ==========================================
+[2026-01-21 10:07:24] [INFO] Cleanup Complete!
+[2026-01-21 10:07:24] [INFO] ==========================================
+[2026-01-21 10:07:39] [INFO] ==========================================
+[2026-01-21 10:07:39] [INFO] EC2 Creation via State Manager
+[2026-01-21 10:07:39] [INFO] ==========================================
+[2026-01-21 10:07:50] [INFO] [1/4] Resolving latest Amazon Linux 2 AMI...
+[2026-01-21 10:07:52] [INFO] ✓ AMI resolved: ami-05000e6b0662e03c0
+[2026-01-21 10:07:52] [INFO] [2/4] Creating security group via state manager...
+[2026-01-21 10:07:59] [INFO] [3/4] Creating key pair via state manager...
+[2026-01-21 10:08:06] [INFO] [4/4] Launching EC2 via state manager...
+[2026-01-21 10:08:13] [INFO] Waiting for instance to be running...
+[2026-01-21 10:08:34] [INFO] ==========================================
+[2026-01-21 10:08:34] [INFO] EC2 Created & Tracked in State
+[2026-01-21 10:08:34] [INFO] Instance ID: i-0d0e34163e1cfdccb
+[2026-01-21 10:08:34] [INFO] Public IP: 18.184.165.113
+[2026-01-21 10:08:34] [INFO] Private IP: 172.31.39.17
+[2026-01-21 10:08:34] [INFO] Key Pair: automation-lab-key-1768990079.pem
+[2026-01-21 10:08:34] [INFO] Security Group: sg-015ce4bf0516645ac
+[2026-01-21 10:08:34] [INFO] SSH: ssh -i automation-lab-key-1768990079.pem ec2-user@18.184.165.113
+[2026-01-21 10:08:34] [INFO] ==========================================
+[2026-01-21 10:08:34] [INFO] Script completed successfully
+[2026-01-21 10:12:10] [INFO] ==========================================
+[2026-01-21 10:12:10] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:12:10] [DRYRUN] DRY-RUN MODE: No changes will be made
+[2026-01-21 10:12:10] [INFO] ==========================================
+[2026-01-21 10:12:22] [DRYRUN] 
+[2026-01-21 10:12:22] [DRYRUN] ==========================================
+[2026-01-21 10:12:22] [DRYRUN] DRY-RUN SUMMARY
+[2026-01-21 10:12:22] [DRYRUN] ==========================================
+[2026-01-21 10:12:22] [DRYRUN] Resources tracked in remote state.json that would be deleted:
+[2026-01-21 10:12:22] [DRYRUN] EC2 Instances:
+[2026-01-21 10:12:22] [DRYRUN]   - i-0d0e34163e1cfdccb
+[2026-01-21 10:12:22] [DRYRUN] Key Pairs:
+[2026-01-21 10:12:22] [DRYRUN]   - automation-lab-key-1768990079
+[2026-01-21 10:12:22] [DRYRUN] Security Groups:
+[2026-01-21 10:12:22] [DRYRUN]   - sg-015ce4bf0516645ac
+[2026-01-21 10:12:22] [DRYRUN] S3 Buckets:
+[2026-01-21 10:12:22] [DRYRUN]   None
+[2026-01-21 10:12:22] [DRYRUN] ==========================================
+[2026-01-21 10:12:22] [DRYRUN] No resources will be deleted in dry-run mode
+[2026-01-21 10:13:00] [INFO] ==========================================
+[2026-01-21 10:13:00] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:13:00] [INFO] ==========================================
+[2026-01-21 10:13:09] [INFO] 
+[2026-01-21 10:13:09] [INFO] ==========================================
+[2026-01-21 10:13:09] [INFO] RESOURCES TO BE DELETED
+[2026-01-21 10:13:09] [INFO] ==========================================
+[2026-01-21 10:13:09] [INFO] EC2 Instances:
+[2026-01-21 10:13:10] [INFO]   - i-0d0e34163e1cfdccb | Name: AutomationLabInstance | Type: t2.micro | AMI: ami-05000e6b0662e03c0 | Created: 2026-01-21T10:08:08Z
+[2026-01-21 10:13:10] [INFO] Key Pairs:
+[2026-01-21 10:13:10] [INFO]   - automation-lab-key-1768990079 | Created: 2026-01-21T10:08:01Z
+[2026-01-21 10:13:10] [INFO] Security Groups:
+[2026-01-21 10:13:10] [INFO]   - sg-015ce4bf0516645ac | Name: devops-sg | Created: 2026-01-21T10:07:54Z
+[2026-01-21 10:13:10] [INFO] S3 Buckets:
+[2026-01-21 10:13:10] [INFO]   None
+[2026-01-21 10:13:10] [INFO] ==========================================
+[2026-01-21 10:13:10] [INFO] 
+[2026-01-21 10:13:36] [INFO] Cleanup confirmed. Proceeding...
+[2026-01-21 10:13:36] [WARN] Terminating EC2: i-0d0e34163e1cfdccb
+[2026-01-21 10:13:36] [WARN] Terminating EC2: i-0d0e34163e1cfdccb
+[2026-01-21 10:14:41] [INFO] ==========================================
+[2026-01-21 10:14:41] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:14:41] [INFO] ==========================================
+[2026-01-21 10:14:52] [INFO] 
+[2026-01-21 10:14:52] [INFO] ==========================================
+[2026-01-21 10:14:52] [INFO] RESOURCES TO BE DELETED
+[2026-01-21 10:14:52] [INFO] ==========================================
+[2026-01-21 10:14:52] [INFO] EC2 Instances:
+[2026-01-21 10:14:53] [INFO]   - i-0d0e34163e1cfdccb | Name: AutomationLabInstance | Type: t2.micro | AMI: ami-05000e6b0662e03c0 | Created: 2026-01-21T10:08:08Z
+[2026-01-21 10:14:53] [INFO] Key Pairs:
+[2026-01-21 10:14:53] [INFO]   - automation-lab-key-1768990079 | Created: 2026-01-21T10:08:01Z
+[2026-01-21 10:14:53] [INFO] Security Groups:
+[2026-01-21 10:14:54] [INFO]   - sg-015ce4bf0516645ac | Name: devops-sg | Created: 2026-01-21T10:07:54Z
+[2026-01-21 10:14:54] [INFO] S3 Buckets:
+[2026-01-21 10:14:54] [INFO]   None
+[2026-01-21 10:14:54] [INFO] ==========================================
+[2026-01-21 10:14:54] [INFO] 
+[2026-01-21 10:14:58] [INFO] Cleanup confirmed. Proceeding...
+[2026-01-21 10:14:58] [WARN] Terminating EC2: i-0d0e34163e1cfdccb
+[2026-01-21 10:14:58] [WARN] Terminating EC2: i-0d0e34163e1cfdccb
+[2026-01-21 10:15:04] [WARN] Deleting Key Pair: automation-lab-key-1768990079
+[2026-01-21 10:15:04] [WARN] Deleting keypair: automation-lab-key-1768990079
+[2026-01-21 10:15:11] [WARN] Deleting Security Group: sg-015ce4bf0516645ac
+[2026-01-21 10:15:11] [WARN] Deleting security group: sg-015ce4bf0516645ac
+[2026-01-21 10:15:17] [INFO] ==========================================
+[2026-01-21 10:15:17] [INFO] Cleanup Complete!
+[2026-01-21 10:15:17] [INFO] ==========================================
+[2026-01-21 10:16:26] [INFO] ==========================================
+[2026-01-21 10:16:26] [INFO] S3 Bucket Creation via State Manager
+[2026-01-21 10:16:26] [WARN] DRY-RUN MODE ENABLED
+[2026-01-21 10:16:26] [INFO] ==========================================
+[2026-01-21 10:16:28] [DRYRUN] ==================== DRY-RUN ====================
+[2026-01-21 10:16:28] [DRYRUN] Resources that will be created:
+[2026-01-21 10:16:28] [DRYRUN] 
+[2026-01-21 10:16:28] [DRYRUN] S3 Bucket:
+[2026-01-21 10:16:28] [DRYRUN]   Name:        automation-lab-bucket-1768990586-sage
+[2026-01-21 10:16:28] [DRYRUN]   Region:      eu-central-1
+[2026-01-21 10:16:28] [DRYRUN]   Versioning:  Enabled
+[2026-01-21 10:16:28] [DRYRUN]   Tags:
+[2026-01-21 10:16:28] [DRYRUN]     - Project:     AutomationLab
+[2026-01-21 10:16:28] [DRYRUN]     - Environment: Development
+[2026-01-21 10:16:28] [DRYRUN] 
+[2026-01-21 10:16:28] [DRYRUN] Sample File:
+[2026-01-21 10:16:28] [DRYRUN]   Filename: welcome.txt
+[2026-01-21 10:16:28] [DRYRUN]   Location: s3://automation-lab-bucket-1768990586-sage/welcome.txt
+[2026-01-21 10:16:28] [DRYRUN] 
+[2026-01-21 10:16:28] [DRYRUN] ==================================================
+[2026-01-21 10:16:28] [DRYRUN] No resources will be created in dry-run mode.
+[2026-01-21 10:16:38] [INFO] ==========================================
+[2026-01-21 10:16:38] [INFO] S3 Bucket Creation via State Manager
+[2026-01-21 10:16:38] [INFO] ==========================================
+[2026-01-21 10:16:45] [INFO] [1/5] Creating S3 bucket: automation-lab-bucket-1768990598-sage
+[2026-01-21 10:16:47] [INFO] ✓ Bucket created
+[2026-01-21 10:16:47] [INFO] [2/5] Enabling versioning
+[2026-01-21 10:16:49] [INFO] ✓ Versioning enabled
+[2026-01-21 10:16:49] [INFO] [3/5] Adding tags
+[2026-01-21 10:16:51] [INFO] [4/5] Creating and uploading sample file
+[2026-01-21 10:16:53] [INFO] ✓ Sample file uploaded
+[2026-01-21 10:16:53] [INFO] [5/5] Tracking bucket in remote state
+[2026-01-21 10:16:58] [INFO] ==========================================
+[2026-01-21 10:16:58] [INFO] S3 Bucket Created & Tracked
+[2026-01-21 10:16:58] [INFO] Bucket: automation-lab-bucket-1768990598-sage
+[2026-01-21 10:16:58] [INFO] Region: eu-central-1
+[2026-01-21 10:16:58] [INFO] Versioning: Enabled
+[2026-01-21 10:16:58] [INFO] ==========================================
+[2026-01-21 10:16:58] [INFO] Bucket name saved to s3_bucket_name.txt
+[2026-01-21 10:16:58] [INFO] Script completed successfully
+[2026-01-21 10:17:30] [INFO] ==========================================
+[2026-01-21 10:17:30] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:17:30] [INFO] ==========================================
+[2026-01-21 10:17:39] [INFO] 
+[2026-01-21 10:17:39] [INFO] ==========================================
+[2026-01-21 10:17:39] [INFO] RESOURCES TO BE DELETED
+[2026-01-21 10:17:39] [INFO] ==========================================
+[2026-01-21 10:17:39] [INFO] EC2 Instances:
+[2026-01-21 10:17:39] [INFO]   None
+[2026-01-21 10:17:39] [INFO] Key Pairs:
+[2026-01-21 10:17:39] [INFO]   None
+[2026-01-21 10:17:39] [INFO] Security Groups:
+[2026-01-21 10:17:39] [INFO]   None
+[2026-01-21 10:17:39] [INFO] S3 Buckets:
+[2026-01-21 10:17:39] [INFO]   - automation-lab-bucket-1768990598-sage | Created: 2026-01-21T10:16:53Z
+[2026-01-21 10:17:39] [INFO] ==========================================
+[2026-01-21 10:17:39] [INFO] 
+[2026-01-21 10:17:48] [INFO] Cleanup confirmed. Proceeding...
+[2026-01-21 10:17:48] [WARN] Deleting S3 Bucket: automation-lab-bucket-1768990598-sage
+[2026-01-21 10:17:52] [WARN] Failed to delete bucket automation-lab-bucket-1768990598-sage
+[2026-01-21 10:17:56] [INFO] ==========================================
+[2026-01-21 10:17:56] [INFO] Cleanup Complete!
+[2026-01-21 10:17:56] [INFO] ==========================================
+[2026-01-21 10:18:10] [INFO] ==========================================
+[2026-01-21 10:18:10] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:18:10] [INFO] ==========================================
+[2026-01-21 10:18:21] [INFO] 
+[2026-01-21 10:18:21] [INFO] ==========================================
+[2026-01-21 10:18:21] [INFO] RESOURCES TO BE DELETED
+[2026-01-21 10:18:21] [INFO] ==========================================
+[2026-01-21 10:18:21] [INFO] EC2 Instances:
+[2026-01-21 10:18:21] [INFO]   None
+[2026-01-21 10:18:21] [INFO] Key Pairs:
+[2026-01-21 10:18:21] [INFO]   None
+[2026-01-21 10:18:21] [INFO] Security Groups:
+[2026-01-21 10:18:21] [INFO]   None
+[2026-01-21 10:18:21] [INFO] S3 Buckets:
+[2026-01-21 10:18:21] [INFO]   None
+[2026-01-21 10:18:21] [INFO] ==========================================
+[2026-01-21 10:18:21] [INFO] 
+[2026-01-21 10:18:31] [INFO] Cleanup cancelled
+[2026-01-21 10:20:19] [INFO] ==========================================
+[2026-01-21 10:20:19] [INFO] S3 Bucket Creation via State Manager
+[2026-01-21 10:20:19] [INFO] ==========================================
+[2026-01-21 10:20:26] [INFO] [1/5] Creating S3 bucket: automation-lab-bucket-1768990819-sage
+[2026-01-21 10:20:28] [INFO] ✓ Bucket created
+[2026-01-21 10:20:28] [INFO] [2/5] Enabling versioning
+[2026-01-21 10:20:30] [INFO] ✓ Versioning enabled
+[2026-01-21 10:20:30] [INFO] [3/5] Adding tags
+[2026-01-21 10:20:33] [INFO] [4/5] Creating and uploading sample file
+[2026-01-21 10:20:35] [INFO] ✓ Sample file uploaded
+[2026-01-21 10:20:35] [INFO] [5/5] Tracking bucket in remote state
+[2026-01-21 10:20:41] [INFO] ==========================================
+[2026-01-21 10:20:41] [INFO] S3 Bucket Created & Tracked
+[2026-01-21 10:20:41] [INFO] Bucket: automation-lab-bucket-1768990819-sage
+[2026-01-21 10:20:41] [INFO] Region: eu-central-1
+[2026-01-21 10:20:41] [INFO] Versioning: Enabled
+[2026-01-21 10:20:41] [INFO] ==========================================
+[2026-01-21 10:20:41] [INFO] Bucket name saved to s3_bucket_name.txt
+[2026-01-21 10:20:41] [INFO] Script completed successfully
+[2026-01-21 10:21:03] [INFO] ==========================================
+[2026-01-21 10:21:03] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:21:03] [INFO] ==========================================
+[2026-01-21 10:21:15] [INFO] 
+[2026-01-21 10:21:15] [INFO] ==========================================
+[2026-01-21 10:21:15] [INFO] RESOURCES TO BE DELETED
+[2026-01-21 10:21:15] [INFO] ==========================================
+[2026-01-21 10:21:15] [INFO] EC2 Instances:
+[2026-01-21 10:21:15] [INFO]   None
+[2026-01-21 10:21:15] [INFO] Key Pairs:
+[2026-01-21 10:21:15] [INFO]   None
+[2026-01-21 10:21:15] [INFO] Security Groups:
+[2026-01-21 10:21:15] [INFO]   None
+[2026-01-21 10:21:15] [INFO] S3 Buckets:
+[2026-01-21 10:21:15] [INFO]   - automation-lab-bucket-1768990819-sage | Created: 2026-01-21T10:20:35Z
+[2026-01-21 10:21:15] [INFO] ==========================================
+[2026-01-21 10:21:15] [INFO] 
+[2026-01-21 10:21:27] [INFO] Cleanup confirmed. Proceeding...
+[2026-01-21 10:21:27] [WARN] Deleting S3 Bucket: automation-lab-bucket-1768990819-sage
+[2026-01-21 10:21:36] [INFO] ✓ Bucket deleted: automation-lab-bucket-1768990819-sage
+[2026-01-21 10:21:43] [INFO] ==========================================
+[2026-01-21 10:21:43] [INFO] Cleanup Complete!
+[2026-01-21 10:21:43] [INFO] ==========================================
+[2026-01-21 10:25:28] [INFO] ==========================================
+[2026-01-21 10:25:28] [INFO] EC2 Creation via State Manager
+[2026-01-21 10:25:28] [INFO] ==========================================
+[2026-01-21 10:25:39] [INFO] SSH CIDR set to: 0.0.0.0/0
+[2026-01-21 10:25:49] [INFO] [1/4] Resolving latest Amazon Linux 2 AMI...
+[2026-01-21 10:25:51] [INFO] ✓ AMI resolved: ami-05000e6b0662e03c0
+[2026-01-21 10:25:51] [INFO] [2/4] Creating security group via state manager...
+[2026-01-21 10:25:57] [INFO] Adding SSH ingress rule to security group...
+[2026-01-21 10:25:59] [INFO] ✓ Security group configured (SSH from 0.0.0.0/0)
+[2026-01-21 10:25:59] [INFO] [3/4] Creating key pair via state manager...
+[2026-01-21 10:26:05] [INFO] [4/4] Launching EC2 via state manager...
+[2026-01-21 10:26:11] [INFO] Waiting for instance to be running...
+[2026-01-21 10:26:33] [INFO] ==========================================
+[2026-01-21 10:26:33] [INFO] EC2 Created & Tracked in State
+[2026-01-21 10:26:33] [INFO] Instance ID: i-025f994a40e3e94c8
+[2026-01-21 10:26:33] [INFO] Public IP: 18.195.117.98
+[2026-01-21 10:26:33] [INFO] Private IP: 172.31.47.109
+[2026-01-21 10:26:33] [INFO] Key Pair: automation-lab-key-1768991159.pem
+[2026-01-21 10:26:33] [INFO] Security Group: sg-0e0aafdaa8c455cc0
+[2026-01-21 10:26:33] [INFO] SSH: ssh -i automation-lab-key-1768991159.pem ec2-user@18.195.117.98
+[2026-01-21 10:26:33] [INFO] ==========================================
+[2026-01-21 10:26:33] [INFO] Script completed successfully
+[2026-01-21 10:27:16] [INFO] ==========================================
+[2026-01-21 10:27:16] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:27:16] [DRYRUN] DRY-RUN MODE: No changes will be made
+[2026-01-21 10:27:16] [INFO] ==========================================
+[2026-01-21 10:27:25] [DRYRUN] 
+[2026-01-21 10:27:25] [DRYRUN] ==========================================
+[2026-01-21 10:27:25] [DRYRUN] DRY-RUN SUMMARY
+[2026-01-21 10:27:25] [DRYRUN] ==========================================
+[2026-01-21 10:27:25] [DRYRUN] Resources tracked in remote state.json that would be deleted:
+[2026-01-21 10:27:25] [DRYRUN] EC2 Instances:
+[2026-01-21 10:27:25] [DRYRUN]   - i-025f994a40e3e94c8
+[2026-01-21 10:27:25] [DRYRUN] Key Pairs:
+[2026-01-21 10:27:25] [DRYRUN]   - automation-lab-key-1768991159
+[2026-01-21 10:27:25] [DRYRUN] Security Groups:
+[2026-01-21 10:27:25] [DRYRUN]   - sg-0e0aafdaa8c455cc0
+[2026-01-21 10:27:25] [DRYRUN] S3 Buckets:
+[2026-01-21 10:27:25] [DRYRUN]   None
+[2026-01-21 10:27:25] [DRYRUN] ==========================================
+[2026-01-21 10:27:25] [DRYRUN] No resources will be deleted in dry-run mode
+[2026-01-21 10:27:36] [INFO] ==========================================
+[2026-01-21 10:27:36] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:27:36] [INFO] ==========================================
+[2026-01-21 10:27:45] [INFO] 
+[2026-01-21 10:27:45] [INFO] ==========================================
+[2026-01-21 10:27:45] [INFO] RESOURCES TO BE DELETED
+[2026-01-21 10:27:45] [INFO] ==========================================
+[2026-01-21 10:27:45] [INFO] EC2 Instances:
+[2026-01-21 10:27:45] [INFO]   - i-025f994a40e3e94c8 | Name: AutomationLabInstance | Type: t2.micro | AMI: ami-05000e6b0662e03c0 | Created: 2026-01-21T10:26:07Z
+[2026-01-21 10:27:45] [INFO] Key Pairs:
+[2026-01-21 10:27:46] [INFO]   - automation-lab-key-1768991159 | Created: 2026-01-21T10:26:00Z
+[2026-01-21 10:27:46] [INFO] Security Groups:
+[2026-01-21 10:27:46] [INFO]   - sg-0e0aafdaa8c455cc0 | Name: devops-sg | Created: 2026-01-21T10:25:52Z
+[2026-01-21 10:27:46] [INFO] S3 Buckets:
+[2026-01-21 10:27:46] [INFO]   None
+[2026-01-21 10:27:46] [INFO] ==========================================
+[2026-01-21 10:27:46] [INFO] 
+[2026-01-21 10:27:50] [INFO] Cleanup confirmed. Proceeding...
+[2026-01-21 10:27:50] [WARN] Terminating EC2: i-025f994a40e3e94c8
+[2026-01-21 10:27:51] [WARN] Terminating EC2: i-025f994a40e3e94c8
+[2026-01-21 10:27:57] [INFO] ✓ EC2 terminated: i-025f994a40e3e94c8
+[2026-01-21 10:27:57] [WARN] Deleting Key Pair: automation-lab-key-1768991159
+[2026-01-21 10:27:59] [WARN] Deleting keypair: automation-lab-key-1768991159
+[2026-01-21 10:28:08] [INFO] ✓ Key pair deleted: automation-lab-key-1768991159
+[2026-01-21 10:28:08] [WARN] Deleting Security Group: sg-0e0aafdaa8c455cc0
+[2026-01-21 10:28:10] [ERROR] Failed to delete security group: sg-0e0aafdaa8c455cc0 (may have dependencies)
+[2026-01-21 10:28:10] [INFO] ==========================================
+[2026-01-21 10:28:10] [INFO] Cleanup Complete!
+[2026-01-21 10:28:10] [INFO] ==========================================
+[2026-01-21 10:29:26] [INFO] ==========================================
+[2026-01-21 10:29:26] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:29:26] [INFO] ==========================================
+[2026-01-21 10:29:36] [INFO] 
+[2026-01-21 10:29:36] [INFO] ==========================================
+[2026-01-21 10:29:36] [INFO] RESOURCES TO BE DELETED
+[2026-01-21 10:29:36] [INFO] ==========================================
+[2026-01-21 10:29:36] [INFO] EC2 Instances:
+[2026-01-21 10:29:36] [INFO]   None
+[2026-01-21 10:29:36] [INFO] Key Pairs:
+[2026-01-21 10:29:36] [INFO]   None
+[2026-01-21 10:29:36] [INFO] Security Groups:
+[2026-01-21 10:29:36] [INFO]   - sg-0e0aafdaa8c455cc0 | Name: devops-sg | Created: 2026-01-21T10:25:52Z
+[2026-01-21 10:29:36] [INFO] S3 Buckets:
+[2026-01-21 10:29:36] [INFO]   None
+[2026-01-21 10:29:36] [INFO] ==========================================
+[2026-01-21 10:29:36] [INFO] 
+[2026-01-21 10:29:48] [INFO] Cleanup confirmed. Proceeding...
+[2026-01-21 10:29:48] [WARN] Deleting Security Group: sg-0e0aafdaa8c455cc0
+[2026-01-21 10:29:49] [WARN] Deleting security group: sg-0e0aafdaa8c455cc0
+[2026-01-21 10:31:39] [INFO] ==========================================
+[2026-01-21 10:31:39] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:31:39] [INFO] ==========================================
+[2026-01-21 10:31:47] [INFO] 
+[2026-01-21 10:31:47] [INFO] ==========================================
+[2026-01-21 10:31:47] [INFO] RESOURCES TO BE DELETED
+[2026-01-21 10:31:47] [INFO] ==========================================
+[2026-01-21 10:31:47] [INFO] EC2 Instances:
+[2026-01-21 10:31:47] [INFO]   None
+[2026-01-21 10:31:47] [INFO] Key Pairs:
+[2026-01-21 10:31:47] [INFO]   None
+[2026-01-21 10:31:47] [INFO] Security Groups:
+[2026-01-21 10:31:48] [INFO]   - sg-0e0aafdaa8c455cc0 | Name: devops-sg | Created: 2026-01-21T10:25:52Z
+[2026-01-21 10:31:48] [INFO] S3 Buckets:
+[2026-01-21 10:31:48] [INFO]   None
+[2026-01-21 10:31:48] [INFO] ==========================================
+[2026-01-21 10:31:48] [INFO] 
+[2026-01-21 10:31:52] [INFO] Cleanup confirmed. Proceeding...
+[2026-01-21 10:31:52] [WARN] Deleting Security Group: sg-0e0aafdaa8c455cc0
+[2026-01-21 10:31:54] [WARN] Security group already deleted (not found in AWS)
+[2026-01-21 10:31:54] [WARN] Deleting security group: sg-0e0aafdaa8c455cc0
+[2026-01-21 10:32:00] [INFO] ✓ Security group removed from state: sg-0e0aafdaa8c455cc0
+[2026-01-21 10:32:00] [INFO] ==========================================
+[2026-01-21 10:32:00] [INFO] Cleanup Complete!
+[2026-01-21 10:32:00] [INFO] ==========================================
+[2026-01-21 10:33:09] [INFO] ==========================================
+[2026-01-21 10:33:09] [INFO] Security Group Creation Script Started
+[2026-01-21 10:33:09] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 10:33:09] [INFO] ==========================================
+[2026-01-21 10:33:17] [DRYRUN] 
+[2026-01-21 10:33:17] [DRYRUN] ==================== DRY-RUN ====================
+[2026-01-21 10:33:17] [DRYRUN] Resources that will be created:
+[2026-01-21 10:33:17] [DRYRUN] 
+[2026-01-21 10:33:17] [DRYRUN] Security Group:
+[2026-01-21 10:33:17] [DRYRUN]   Name: devops-sg
+[2026-01-21 10:33:17] [DRYRUN]   Region: eu-central-1
+[2026-01-21 10:33:17] [DRYRUN] 
+[2026-01-21 10:33:17] [DRYRUN] Ingress Rules:
+[2026-01-21 10:33:17] [DRYRUN]   - Protocol: TCP
+[2026-01-21 10:33:17] [DRYRUN]     Port: 22 (SSH)
+[2026-01-21 10:33:17] [DRYRUN]     CIDR: 0.0.0.0/0
+[2026-01-21 10:33:17] [DRYRUN]   - Protocol: TCP
+[2026-01-21 10:33:17] [DRYRUN]     Port: 80 (HTTP)
+[2026-01-21 10:33:17] [DRYRUN]     CIDR: 0.0.0.0/0
+[2026-01-21 10:33:17] [DRYRUN] 
+[2026-01-21 10:33:17] [DRYRUN] State Tracking:
+[2026-01-21 10:33:17] [DRYRUN]   Local State:  ./state.json
+[2026-01-21 10:33:17] [DRYRUN]   Remote State: s3://aws-project-state/state.json
+[2026-01-21 10:33:17] [DRYRUN] 
+[2026-01-21 10:33:17] [DRYRUN] ==================================================
+[2026-01-21 10:33:17] [DRYRUN] No resources will be created in dry-run mode.
+[2026-01-21 10:34:37] [INFO] ==========================================
+[2026-01-21 10:34:37] [INFO] Security Group Creation Script Started
+[2026-01-21 10:34:37] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 10:34:37] [INFO] ==========================================
+[2026-01-21 10:34:43] [DRYRUN] 
+[2026-01-21 10:34:43] [DRYRUN] ==================== DRY-RUN ====================
+[2026-01-21 10:34:43] [DRYRUN] Resources that will be created:
+[2026-01-21 10:34:43] [DRYRUN] 
+[2026-01-21 10:34:43] [DRYRUN] Security Group:
+[2026-01-21 10:34:43] [DRYRUN]   Name: devops-sg
+[2026-01-21 10:34:43] [DRYRUN]   Region: eu-central-1
+[2026-01-21 10:34:43] [DRYRUN] 
+[2026-01-21 10:34:43] [DRYRUN] Ingress Rules:
+[2026-01-21 10:34:43] [DRYRUN]   - Protocol: TCP
+[2026-01-21 10:34:43] [DRYRUN]     Port: 22 (SSH)
+[2026-01-21 10:34:43] [DRYRUN]     CIDR: 0.0.0.0/0
+[2026-01-21 10:34:43] [DRYRUN]   - Protocol: TCP
+[2026-01-21 10:34:43] [DRYRUN]     Port: 80 (HTTP)
+[2026-01-21 10:34:43] [DRYRUN]     CIDR: 0.0.0.0/0
+[2026-01-21 10:34:43] [DRYRUN] 
+[2026-01-21 10:34:43] [DRYRUN] No resources will be created in dry-run mode.
+[2026-01-21 10:35:14] [INFO] ==========================================
+[2026-01-21 10:35:14] [INFO] Security Group Creation Script Started
+[2026-01-21 10:35:14] [INFO] ==========================================
+[2026-01-21 10:35:26] [INFO] Adding SSH (22) and HTTP (80) rules to devops-sg
+[2026-01-21 10:35:29] [INFO] 
+[2026-01-21 10:35:29] [INFO] ==========================================
+[2026-01-21 10:35:29] [INFO] Security Group Created Successfully!
+[2026-01-21 10:35:29] [INFO] Security Group Name: devops-sg
+[2026-01-21 10:35:29] [INFO] Security Group ID: sg-09b2cd1cbcd458e7c
+[2026-01-21 10:35:29] [INFO] Inbound Rules:
+[2026-01-21 10:35:33] [INFO] ==========================================
+[2026-01-21 10:35:33] [INFO] Security group tracked in state backend
+[2026-01-21 10:37:40] [INFO] ==========================================
+[2026-01-21 10:37:40] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:37:40] [INFO] ==========================================
+[2026-01-21 10:37:51] [INFO] 
+[2026-01-21 10:37:51] [INFO] ==========================================
+[2026-01-21 10:37:51] [INFO] RESOURCES TO BE DELETED
+[2026-01-21 10:37:51] [INFO] ==========================================
+[2026-01-21 10:37:51] [INFO] EC2 Instances:
+[2026-01-21 10:37:51] [INFO]   None
+[2026-01-21 10:37:51] [INFO] Key Pairs:
+[2026-01-21 10:37:51] [INFO]   None
+[2026-01-21 10:37:51] [INFO] Security Groups:
+[2026-01-21 10:37:51] [INFO]   - sg-09b2cd1cbcd458e7c | Name: devops-sg | Created: 2026-01-21T10:35:21Z
+[2026-01-21 10:37:51] [INFO] S3 Buckets:
+[2026-01-21 10:37:51] [INFO]   None
+[2026-01-21 10:37:51] [INFO] ==========================================
+[2026-01-21 10:37:51] [INFO] 
+[2026-01-21 10:37:57] [INFO] Cleanup confirmed. Proceeding...
+[2026-01-21 10:37:57] [WARN] Deleting Security Group: sg-09b2cd1cbcd458e7c
+[2026-01-21 10:37:59] [WARN] Deleting security group: sg-09b2cd1cbcd458e7c
+[2026-01-21 10:38:05] [INFO] ✓ Security group deleted: sg-09b2cd1cbcd458e7c
+[2026-01-21 10:38:05] [INFO] ==========================================
+[2026-01-21 10:38:05] [INFO] Cleanup Complete!
+[2026-01-21 10:38:05] [INFO] ==========================================
+[2026-01-21 10:40:58] [INFO] ==========================================
+[2026-01-21 10:40:58] [INFO] Security Group Creation Script Started
+[2026-01-21 10:40:58] [INFO] ==========================================
+[2026-01-21 10:41:09] [INFO] SSH CIDR set to: 0.0.0.0/0
+[2026-01-21 10:41:18] [INFO] HTTP CIDR set to: 0.0.0.0/0
+[2026-01-21 10:41:32] [INFO] Adding SSH (22) and HTTP (80) rules to devops-sg
+[2026-01-21 10:41:35] [INFO] 
+[2026-01-21 10:41:35] [INFO] ==========================================
+[2026-01-21 10:41:35] [INFO] Security Group Created Successfully!
+[2026-01-21 10:41:35] [INFO] Security Group Name: devops-sg
+[2026-01-21 10:41:35] [INFO] Security Group ID: sg-0541f34bcc5bbdf7b
+[2026-01-21 10:41:35] [INFO] Inbound Rules:
+[2026-01-21 10:42:26] [INFO] ==========================================
+[2026-01-21 10:42:26] [INFO] Security group tracked in state backend
+[2026-01-21 10:42:37] [INFO] ==========================================
+[2026-01-21 10:42:37] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:42:37] [DRYRUN] DRY-RUN MODE: No changes will be made
+[2026-01-21 10:42:37] [INFO] ==========================================
+[2026-01-21 10:42:46] [DRYRUN] 
+[2026-01-21 10:42:46] [DRYRUN] ==========================================
+[2026-01-21 10:42:46] [DRYRUN] DRY-RUN SUMMARY
+[2026-01-21 10:42:46] [DRYRUN] ==========================================
+[2026-01-21 10:42:46] [DRYRUN] Resources tracked in remote state.json that would be deleted:
+[2026-01-21 10:42:46] [DRYRUN] EC2 Instances:
+[2026-01-21 10:42:46] [DRYRUN]   None
+[2026-01-21 10:42:46] [DRYRUN] Key Pairs:
+[2026-01-21 10:42:47] [DRYRUN]   None
+[2026-01-21 10:42:47] [DRYRUN] Security Groups:
+[2026-01-21 10:42:47] [DRYRUN]   - sg-0541f34bcc5bbdf7b
+[2026-01-21 10:42:47] [DRYRUN] S3 Buckets:
+[2026-01-21 10:42:47] [DRYRUN]   None
+[2026-01-21 10:42:47] [DRYRUN] ==========================================
+[2026-01-21 10:42:47] [DRYRUN] No resources will be deleted in dry-run mode
+[2026-01-21 10:43:21] [INFO] ==========================================
+[2026-01-21 10:43:21] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 10:43:21] [INFO] ==========================================
+[2026-01-21 10:43:32] [INFO] 
+[2026-01-21 10:43:32] [INFO] ==========================================
+[2026-01-21 10:43:32] [INFO] RESOURCES TO BE DELETED
+[2026-01-21 10:43:32] [INFO] ==========================================
+[2026-01-21 10:43:32] [INFO] EC2 Instances:
+[2026-01-21 10:43:32] [INFO]   None
+[2026-01-21 10:43:32] [INFO] Key Pairs:
+[2026-01-21 10:43:32] [INFO]   None
+[2026-01-21 10:43:32] [INFO] Security Groups:
+[2026-01-21 10:43:33] [INFO]   - sg-0541f34bcc5bbdf7b | Name: devops-sg | Created: 2026-01-21T10:41:27Z
+[2026-01-21 10:43:33] [INFO] S3 Buckets:
+[2026-01-21 10:43:33] [INFO]   None
+[2026-01-21 10:43:33] [INFO] ==========================================
+[2026-01-21 10:43:33] [INFO] 
+[2026-01-21 10:43:37] [INFO] Cleanup confirmed. Proceeding...
+[2026-01-21 10:43:37] [WARN] Deleting Security Group: sg-0541f34bcc5bbdf7b
+[2026-01-21 10:43:39] [WARN] Deleting security group: sg-0541f34bcc5bbdf7b
+[2026-01-21 10:43:45] [INFO] ✓ Security group deleted: sg-0541f34bcc5bbdf7b
+[2026-01-21 10:43:45] [INFO] ==========================================
+[2026-01-21 10:43:45] [INFO] Cleanup Complete!
+[2026-01-21 10:43:45] [INFO] ==========================================
