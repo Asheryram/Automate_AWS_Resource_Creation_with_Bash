@@ -1,176 +1,56 @@
-[2026-01-21 07:47:40] [INFO] ==========================================
-[2026-01-21 07:47:40] [INFO] Security Group Creation Script Started
-[2026-01-21 07:47:40] [WARN] DRY-RUN MODE: No changes will be made
-[2026-01-21 07:47:40] [INFO] ==========================================
-[2026-01-21 07:47:44] [INFO] [1/5] Getting default VPC
-[2026-01-21 07:47:44] [INFO] [DRY-RUN] Would query for default VPC
-[2026-01-21 07:47:44] [INFO] ✓ Using VPC: vpc-dry-run-example
-[2026-01-21 07:47:44] [INFO] [2/5] Checking if security group exists
-[2026-01-21 07:47:44] [INFO] [DRY-RUN] Would check for existing security group: devops-sg
-[2026-01-21 07:47:44] [INFO] [3/5] Creating security group: devops-sg
-[2026-01-21 07:47:44] [INFO] [DRY-RUN] Would create security group with:
-[2026-01-21 07:47:44] [INFO] [DRY-RUN]   Name: devops-sg
-[2026-01-21 07:47:44] [INFO] [DRY-RUN]   Description: Security group for DevOps automation lab
-[2026-01-21 07:47:44] [INFO] [DRY-RUN]   VPC ID: vpc-dry-run-example
-[2026-01-21 07:47:44] [INFO] ✓ Security group created: sg-dry-run-example
-[2026-01-21 07:47:44] [INFO] [4/5] Adding SSH ingress rule (port 22)
-[2026-01-21 07:47:44] [INFO] [DRY-RUN] Would add ingress rule:
-[2026-01-21 07:47:44] [INFO] [DRY-RUN]   Protocol: tcp
-[2026-01-21 07:47:44] [INFO] [DRY-RUN]   Port: 22
-[2026-01-21 07:47:44] [INFO] [DRY-RUN]   CIDR: 0.0.0.0/0
-[2026-01-21 07:47:44] [INFO] [5/5] Adding HTTP ingress rule (port 80)
-[2026-01-21 07:47:44] [INFO] [DRY-RUN] Would add ingress rule:
-[2026-01-21 07:47:45] [INFO] [DRY-RUN]   Protocol: tcp
-[2026-01-21 07:47:45] [INFO] [DRY-RUN]   Port: 80
-[2026-01-21 07:47:45] [INFO] [DRY-RUN]   CIDR: 0.0.0.0/0
-[2026-01-21 07:47:45] [INFO] 
-[2026-01-21 07:47:45] [INFO] ==========================================
-[2026-01-21 07:47:45] [INFO] Security Group Created Successfully!
-[2026-01-21 07:47:45] [INFO] ==========================================
-[2026-01-21 07:47:45] [INFO] Security Group ID: sg-dry-run-example
-[2026-01-21 07:47:45] [INFO] Security Group Name: devops-sg
-[2026-01-21 07:47:45] [INFO] VPC ID: vpc-dry-run-example
-[2026-01-21 07:47:45] [INFO] 
-[2026-01-21 07:47:45] [INFO] [DRY-RUN] Would display inbound rules
-[2026-01-21 07:47:45] [INFO] [DRY-RUN] Expected rules:
-[2026-01-21 07:47:45] [INFO] [DRY-RUN]   - SSH (22) from 0.0.0.0/0
-[2026-01-21 07:47:45] [INFO] [DRY-RUN]   - HTTP (80) from 0.0.0.0/0
-[2026-01-21 07:47:45] [INFO] ==========================================
-[2026-01-21 07:47:45] [INFO] [DRY-RUN] Would save security group ID to security_group_id.txt
-[2026-01-21 07:47:45] [INFO] Script completed successfully
-[2026-01-21 07:49:55] [INFO] ==========================================
-[2026-01-21 07:49:55] [INFO] S3 Bucket Creation Script Started
-[2026-01-21 07:49:55] [WARN] DRY-RUN MODE: No changes will be made
-[2026-01-21 07:49:55] [INFO] ==========================================
-[2026-01-21 07:49:57] [INFO] [1/5] Creating S3 bucket: automation-lab-bucket-1768981795-azureadyramashertettehabot
-[2026-01-21 07:49:57] [INFO] [DRY-RUN] Would create S3 bucket with:
-[2026-01-21 07:49:58] [INFO] [DRY-RUN]   Bucket Name: automation-lab-bucket-1768981795-azureadyramashertettehabot
-[2026-01-21 07:49:58] [INFO] [DRY-RUN]   Region: eu-central-1
-[2026-01-21 07:49:58] [INFO] [DRY-RUN]   Configuration: LocationConstraint=eu-central-1
-[2026-01-21 07:49:58] [INFO] ✓ Bucket created: automation-lab-bucket-1768981795-azureadyramashertettehabot
-[2026-01-21 07:49:58] [INFO] [2/5] Enabling versioning
-[2026-01-21 07:49:58] [INFO] [DRY-RUN] Would enable versioning on bucket: automation-lab-bucket-1768981795-azureadyramashertettehabot
-[2026-01-21 07:49:58] [INFO] [DRY-RUN]   Versioning Status: Enabled
-[2026-01-21 07:49:58] [INFO] ✓ Versioning enabled
-[2026-01-21 07:49:58] [INFO] [3/5] Adding tags
-[2026-01-21 07:49:58] [INFO] [DRY-RUN] Would add tags to bucket:
-[2026-01-21 07:49:58] [INFO] [DRY-RUN]   Project=AutomationLab
-[2026-01-21 07:49:58] [INFO] [DRY-RUN]   Environment=Development
-[2026-01-21 07:49:58] [INFO] ✓ Tags added (Project=AutomationLab, Environment=Development)
-[2026-01-21 07:49:58] [INFO] [4/5] Creating sample file
-[2026-01-21 07:49:58] [INFO] [DRY-RUN] Would create sample file: welcome.txt
-[2026-01-21 07:49:58] [INFO] [DRY-RUN]   Content: Welcome message with metadata
-[2026-01-21 07:49:58] [INFO] ✓ Sample file created: welcome.txt
-[2026-01-21 07:49:59] [INFO] [5/5] Uploading file to S3
-[2026-01-21 07:49:59] [INFO] [DRY-RUN] Would upload welcome.txt to s3://automation-lab-bucket-1768981795-azureadyramashertettehabot/welcome.txt
-[2026-01-21 07:49:59] [INFO] ✓ File uploaded: s3://automation-lab-bucket-1768981795-azureadyramashertettehabot/welcome.txt
-[2026-01-21 07:49:59] [INFO] 
-[2026-01-21 07:49:59] [INFO] ==========================================
-[2026-01-21 07:49:59] [INFO] S3 Bucket Created Successfully!
-[2026-01-21 07:49:59] [INFO] ==========================================
-[2026-01-21 07:49:59] [INFO] Bucket Name: automation-lab-bucket-1768981795-azureadyramashertettehabot
-[2026-01-21 07:49:59] [INFO] Region: eu-central-1
-[2026-01-21 07:49:59] [INFO] Versioning: Enabled
-[2026-01-21 07:49:59] [INFO] Sample File: welcome.txt
-[2026-01-21 07:49:59] [INFO] 
-[2026-01-21 07:49:59] [INFO] To download the file:
-[2026-01-21 07:49:59] [INFO]   aws s3 cp s3://automation-lab-bucket-1768981795-azureadyramashertettehabot/welcome.txt .
-[2026-01-21 07:49:59] [INFO] 
-[2026-01-21 07:49:59] [INFO] To list bucket contents:
-[2026-01-21 07:49:59] [INFO]   aws s3 ls s3://automation-lab-bucket-1768981795-azureadyramashertettehabot/
-[2026-01-21 07:49:59] [INFO] 
-[2026-01-21 07:50:00] [INFO] To view file in browser:
-[2026-01-21 07:50:00] [INFO]   https://automation-lab-bucket-1768981795-azureadyramashertettehabot.s3.eu-central-1.amazonaws.com/welcome.txt
-[2026-01-21 07:50:00] [INFO] ==========================================
-[2026-01-21 07:50:00] [INFO] [DRY-RUN] Would save bucket name to s3_bucket_name.txt
-[2026-01-21 07:50:00] [INFO] Script completed successfully
-[2026-01-21 07:50:59] [INFO] ==========================================
-[2026-01-21 07:50:59] [INFO] S3 Bucket Creation Script Started
-[2026-01-21 07:50:59] [INFO] ==========================================
-[2026-01-21 07:51:02] [INFO] [1/5] Creating S3 bucket: automation-lab-bucket-1768981859-azureadyramashertettehabot
-[2026-01-21 07:51:04] [INFO] ✓ Bucket created: automation-lab-bucket-1768981859-azureadyramashertettehabot
-[2026-01-21 07:51:04] [INFO] [2/5] Enabling versioning
-[2026-01-21 07:51:07] [INFO] ✓ Versioning enabled
-[2026-01-21 07:51:07] [INFO] [3/5] Adding tags
-[2026-01-21 07:51:09] [INFO] ✓ Tags added (Project=AutomationLab, Environment=Development)
-[2026-01-21 07:51:09] [INFO] [4/5] Creating sample file
-[2026-01-21 07:51:09] [INFO] ✓ Sample file created: welcome.txt
-[2026-01-21 07:51:09] [INFO] [5/5] Uploading file to S3
-[2026-01-21 07:51:11] [INFO] ✓ File uploaded: s3://automation-lab-bucket-1768981859-azureadyramashertettehabot/welcome.txt
-[2026-01-21 07:51:11] [INFO] 
-[2026-01-21 07:51:11] [INFO] ==========================================
-[2026-01-21 07:51:11] [INFO] S3 Bucket Created Successfully!
-[2026-01-21 07:51:11] [INFO] ==========================================
-[2026-01-21 07:51:11] [INFO] Bucket Name: automation-lab-bucket-1768981859-azureadyramashertettehabot
-[2026-01-21 07:51:11] [INFO] Region: eu-central-1
-[2026-01-21 07:51:11] [INFO] Versioning: Enabled
-[2026-01-21 07:51:11] [INFO] Sample File: welcome.txt
-[2026-01-21 07:51:11] [INFO] 
-[2026-01-21 07:51:11] [INFO] To download the file:
-[2026-01-21 07:51:11] [INFO]   aws s3 cp s3://automation-lab-bucket-1768981859-azureadyramashertettehabot/welcome.txt .
-[2026-01-21 07:51:11] [INFO] 
-[2026-01-21 07:51:12] [INFO] To list bucket contents:
-[2026-01-21 07:51:12] [INFO]   aws s3 ls s3://automation-lab-bucket-1768981859-azureadyramashertettehabot/
-[2026-01-21 07:51:12] [INFO] 
-[2026-01-21 07:51:12] [INFO] To view file in browser:
-[2026-01-21 07:51:12] [INFO]   https://automation-lab-bucket-1768981859-azureadyramashertettehabot.s3.eu-central-1.amazonaws.com/welcome.txt
-[2026-01-21 07:51:12] [INFO] ==========================================
-[2026-01-21 07:51:12] [INFO] Bucket name saved to s3_bucket_name.txt
-[2026-01-21 07:51:12] [INFO] Script completed successfully
-[2026-01-21 07:52:07] [INFO] ==========================================
-[2026-01-21 07:52:07] [INFO] AWS Resources Cleanup Script Started
-[2026-01-21 07:52:07] [WARN] DRY-RUN MODE: No changes will be made
-[2026-01-21 07:52:07] [INFO] ==========================================
-[2026-01-21 07:52:07] [INFO] 
-[2026-01-21 07:52:09] [INFO] [DRY-RUN] Skipping confirmation prompt
-[2026-01-21 07:52:09] [INFO] [1/4] Searching for EC2 instances with tag Project=AutomationLab
-[2026-01-21 07:52:09] [INFO] [DRY-RUN] Would query for instances with filters:
-[2026-01-21 07:52:09] [INFO] [DRY-RUN]   Tag: Project=AutomationLab
-[2026-01-21 07:52:09] [INFO] [DRY-RUN]   State: running,stopped,pending
-[2026-01-21 07:52:09] [INFO] [DRY-RUN] Would find instances: i-example1 i-example2
-[2026-01-21 07:52:09] [INFO] Found instances: i-example1 i-example2
-[2026-01-21 07:52:09] [INFO] [DRY-RUN] Would terminate instances: i-example1 i-example2
-[2026-01-21 07:52:09] [INFO] [DRY-RUN] Would wait for instances to terminate
-[2026-01-21 07:52:10] [INFO] ✓ All instances terminated successfully
-[2026-01-21 07:52:10] [INFO] [2/4] Searching for automation lab key pairs
-[2026-01-21 07:52:10] [INFO] [DRY-RUN] Would query for key pairs matching: automation-lab-key-*
-[2026-01-21 07:52:10] [INFO] [DRY-RUN] Would find key pairs: automation-lab-key-example1 automation-lab-key-example2
-[2026-01-21 07:52:10] [INFO] Deleting key pair: automation-lab-key-example1
-[2026-01-21 07:52:10] [INFO] [DRY-RUN] Would delete key pair: automation-lab-key-example1
-[2026-01-21 07:52:10] [INFO] [DRY-RUN] Would delete local file: automation-lab-key-example1.pem (if exists)
-[2026-01-21 07:52:10] [INFO] Deleting key pair: automation-lab-key-example2
-[2026-01-21 07:52:10] [INFO] [DRY-RUN] Would delete key pair: automation-lab-key-example2
-[2026-01-21 07:52:10] [INFO] [DRY-RUN] Would delete local file: automation-lab-key-example2.pem (if exists)
-[2026-01-21 07:52:10] [INFO] [3/4] Searching for security group: devops-sg
-[2026-01-21 07:52:10] [INFO] [DRY-RUN] Would query for security group: devops-sg
-[2026-01-21 07:52:10] [INFO] [DRY-RUN] Would find security group: sg-dry-run-example
-[2026-01-21 07:52:10] [INFO] [DRY-RUN] Would attempt to delete security group: sg-dry-run-example
-[2026-01-21 07:52:10] [INFO] [DRY-RUN] Would retry up to 5 times if in use
-[2026-01-21 07:52:10] [INFO] ✓ Security group deletion attempted
-[2026-01-21 07:52:10] [INFO] [4/4] Searching for automation lab S3 buckets
-[2026-01-21 07:52:10] [INFO] [DRY-RUN] Would query for buckets matching: automation-lab-bucket-*
-[2026-01-21 07:52:11] [INFO] [DRY-RUN] Would find buckets: automation-lab-bucket-example1 automation-lab-bucket-example2
-[2026-01-21 07:52:11] [INFO] Processing bucket: automation-lab-bucket-example1
-[2026-01-21 07:52:11] [INFO] [DRY-RUN] Would empty bucket: automation-lab-bucket-example1
-[2026-01-21 07:52:11] [INFO] [DRY-RUN] Would delete all object versions
-[2026-01-21 07:52:11] [INFO] [DRY-RUN] Would delete all delete markers
-[2026-01-21 07:52:11] [INFO] [DRY-RUN] Would abort all multipart uploads
-[2026-01-21 07:52:11] [INFO] [DRY-RUN] Would delete bucket: automation-lab-bucket-example1
-[2026-01-21 07:52:11] [INFO] Processing bucket: automation-lab-bucket-example2
-[2026-01-21 07:52:11] [INFO] [DRY-RUN] Would empty bucket: automation-lab-bucket-example2
-[2026-01-21 07:52:11] [INFO] [DRY-RUN] Would delete all object versions
-[2026-01-21 07:52:11] [INFO] [DRY-RUN] Would delete all delete markers
-[2026-01-21 07:52:11] [INFO] [DRY-RUN] Would abort all multipart uploads
-[2026-01-21 07:52:11] [INFO] [DRY-RUN] Would delete bucket: automation-lab-bucket-example2
-[2026-01-21 07:52:11] [INFO] 
-[2026-01-21 07:52:11] [INFO] Cleaning up local tracking files...
-[2026-01-21 07:52:11] [INFO] [DRY-RUN] Would delete local files:
-[2026-01-21 07:52:11] [INFO] [DRY-RUN]   - ec2_instance_info.txt
-[2026-01-21 07:52:12] [INFO] [DRY-RUN]   - security_group_id.txt
-[2026-01-21 07:52:12] [INFO] [DRY-RUN]   - s3_bucket_name.txt
-[2026-01-21 07:52:12] [INFO] [DRY-RUN]   - welcome.txt
-[2026-01-21 07:52:12] [INFO] 
-[2026-01-21 07:52:12] [INFO] ==========================================
-[2026-01-21 07:52:12] [INFO] Cleanup Complete!
-[2026-01-21 07:52:12] [INFO] ==========================================
-[2026-01-21 07:52:12] [INFO] Check the log file for details: ./aws_project.log
+[2026-01-21 08:13:47] [INFO] ==========================================
+[2026-01-21 08:13:47] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 08:13:47] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 08:13:47] [INFO] ==========================================
+[2026-01-21 08:13:47] [INFO] 
+[2026-01-21 08:13:49] [INFO] [1/4] Searching for EC2 instances with tag Project=AutomationLab
+[2026-01-21 08:13:50] [INFO] Found instances: i-example1 i-example2
+[2026-01-21 08:13:50] [INFO] ✓ All instances terminated successfully
+[2026-01-21 08:13:50] [INFO] [2/4] Searching for automation lab key pairs
+[2026-01-21 08:13:50] [INFO] Deleting key pair: automation-lab-key-example1
+[2026-01-21 08:13:50] [INFO] Deleting key pair: automation-lab-key-example2
+[2026-01-21 08:13:50] [INFO] [3/4] Searching for security group: devops-sg
+[2026-01-21 08:13:50] [INFO] ✓ Security group deletion attempted
+[2026-01-21 08:13:50] [INFO] [4/4] Searching for automation lab S3 buckets
+[2026-01-21 08:13:51] [INFO] Processing bucket: automation-lab-bucket-example1
+[2026-01-21 08:13:51] [INFO] Processing bucket: automation-lab-bucket-example2
+[2026-01-21 08:13:51] [INFO] 
+[2026-01-21 08:13:51] [INFO] Cleaning up local tracking files...
+[2026-01-21 08:13:51] [INFO] 
+[2026-01-21 08:13:51] [INFO] ==========================================
+[2026-01-21 08:13:51] [INFO] Cleanup Complete!
+[2026-01-21 08:13:51] [INFO] ==========================================
+[2026-01-21 08:13:51] [INFO] Check the log file for details: ./aws_project.log
+[2026-01-21 08:16:00] [INFO] ==========================================
+[2026-01-21 08:16:00] [INFO] S3 Bucket Creation Script Started
+[2026-01-21 08:16:00] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 08:16:00] [INFO] ==========================================
+[2026-01-21 08:16:02] [INFO] [1/5] Creating S3 bucket: automation-lab-bucket-1768983360-azureadyramashertettehabot
+[2026-01-21 08:16:02] [INFO] ✓ Bucket created: automation-lab-bucket-1768983360-azureadyramashertettehabot
+[2026-01-21 08:16:02] [INFO] [2/5] Enabling versioning
+[2026-01-21 08:16:02] [INFO] ✓ Versioning enabled
+[2026-01-21 08:16:02] [INFO] [3/5] Adding tags
+[2026-01-21 08:16:02] [INFO] ✓ Tags added (Project=AutomationLab, Environment=Development)
+[2026-01-21 08:16:02] [INFO] [4/5] Creating sample file
+[2026-01-21 08:16:03] [INFO] ✓ Sample file created: welcome.txt
+[2026-01-21 08:16:03] [INFO] [5/5] Uploading file to S3
+[2026-01-21 08:16:03] [INFO] ✓ File uploaded: s3://automation-lab-bucket-1768983360-azureadyramashertettehabot/welcome.txt
+[2026-01-21 08:16:03] [INFO] 
+[2026-01-21 08:16:03] [INFO] ==========================================
+[2026-01-21 08:16:03] [INFO] S3 Bucket Created Successfully!
+[2026-01-21 08:16:03] [INFO] ==========================================
+[2026-01-21 08:16:03] [INFO] Bucket Name: automation-lab-bucket-1768983360-azureadyramashertettehabot
+[2026-01-21 08:16:03] [INFO] Region: eu-central-1
+[2026-01-21 08:16:03] [INFO] Versioning: Enabled
+[2026-01-21 08:16:03] [INFO] Sample File: welcome.txt
+[2026-01-21 08:16:03] [INFO] 
+[2026-01-21 08:16:03] [INFO] To download the file:
+[2026-01-21 08:16:03] [INFO]   aws s3 cp s3://automation-lab-bucket-1768983360-azureadyramashertettehabot/welcome.txt .
+[2026-01-21 08:16:03] [INFO] 
+[2026-01-21 08:16:03] [INFO] To list bucket contents:
+[2026-01-21 08:16:03] [INFO]   aws s3 ls s3://automation-lab-bucket-1768983360-azureadyramashertettehabot/
+[2026-01-21 08:16:04] [INFO] 
+[2026-01-21 08:16:04] [INFO] To view file in browser:
+[2026-01-21 08:16:04] [INFO]   https://automation-lab-bucket-1768983360-azureadyramashertettehabot.s3.eu-central-1.amazonaws.com/welcome.txt
+[2026-01-21 08:16:04] [INFO] ==========================================
+[2026-01-21 08:16:04] [INFO] Script completed successfully

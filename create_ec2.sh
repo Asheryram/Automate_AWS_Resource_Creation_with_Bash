@@ -69,8 +69,8 @@ aws sts get-caller-identity >/dev/null 2>&1 || error_exit "AWS credentials not c
 log_info "[1/5] Retrieving latest Amazon Linux 2 AMI in ${REGION}..."
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would query for latest Amazon Linux 2 AMI"
-    log_info "[DRY-RUN]   Filters: amzn2-ami-hvm-*-x86_64-gp2, state=available"
+    log_dryrun "Would query for latest Amazon Linux 2 AMI"
+    log_dryrun "  Filters: amzn2-ami-hvm-*-x86_64-gp2, state=available"
     AMI_ID="ami-dry-run-example"
 else
     AMI_ID=$(aws ec2 describe-images \
@@ -93,10 +93,10 @@ KEY_NAME="automation-lab-key-$(date +%s)"
 log_info "[2/5] Creating key pair: ${KEY_NAME}"
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would create key pair:"
-    log_info "[DRY-RUN]   Key Name: ${KEY_NAME}"
-    log_info "[DRY-RUN]   File: ${KEY_NAME}.pem"
-    log_info "[DRY-RUN]   Permissions: 400"
+    log_dryrun "Would create key pair:"
+    log_dryrun "  Key Name: ${KEY_NAME}"
+    log_dryrun "  File: ${KEY_NAME}.pem"
+    log_dryrun "  Permissions: 400"
 else
     aws ec2 create-key-pair \
         --key-name "${KEY_NAME}" \
@@ -116,9 +116,9 @@ SG_NAME="${SG_NAME:-devops-sg}"
 log_info "[3/5] Checking for security group: ${SG_NAME}"
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would query for security group: ${SG_NAME}"
+    log_dryrun "Would query for security group: ${SG_NAME}"
     SG_ID="sg-dry-run-example"
-    log_info "[DRY-RUN] Assuming security group exists"
+    log_dryrun "Assuming security group exists"
 else
     SG_ID=$(aws ec2 describe-security-groups \
         --region "${REGION}" \
@@ -171,13 +171,13 @@ log_info "✓ Using security group: ${SG_ID}"
 log_info "[4/5] Launching EC2 instance..."
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would launch EC2 instance with:"
-    log_info "[DRY-RUN]   AMI ID: ${AMI_ID}"
-    log_info "[DRY-RUN]   Instance Type: ${INSTANCE_TYPE}"
-    log_info "[DRY-RUN]   Key Name: ${KEY_NAME}"
-    log_info "[DRY-RUN]   Security Group: ${SG_ID}"
-    log_info "[DRY-RUN]   Region: ${REGION}"
-    log_info "[DRY-RUN]   Tags: Name=AutomationLabInstance, Project=${TAG_PROJECT}"
+    log_dryrun "Would launch EC2 instance with:"
+    log_dryrun "  AMI ID: ${AMI_ID}"
+    log_dryrun "  Instance Type: ${INSTANCE_TYPE}"
+    log_dryrun "  Key Name: ${KEY_NAME}"
+    log_dryrun "  Security Group: ${SG_ID}"
+    log_dryrun "  Region: ${REGION}"
+    log_dryrun "  Tags: Name=AutomationLabInstance, Project=${TAG_PROJECT}"
     INSTANCE_ID="i-dry-run-example"
     PUBLIC_IP="203.0.113.42"  # Example IP for dry-run
     PRIVATE_IP="10.0.1.42"
@@ -239,7 +239,7 @@ fi
 
 # Save instance info
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would save instance information to ec2_instance_info.txt"
+    log_dryrun "Would save instance information to ec2_instance_info.txt"
 else
     cat > ec2_instance_info.txt <<EOF
 Instance ID: ${INSTANCE_ID}

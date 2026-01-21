@@ -67,7 +67,7 @@ aws sts get-caller-identity >/dev/null 2>&1 || error_exit "AWS credentials not c
 log_info "[1/5] Getting default VPC"
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would query for default VPC"
+    log_dryrun "Would query for default VPC"
     VPC_ID="vpc-dry-run-example"
 else
     if [ -z "$VPC_ID" ]; then
@@ -89,7 +89,7 @@ log_info "✓ Using VPC: ${VPC_ID}"
 log_info "[2/5] Checking if security group exists"
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would check for existing security group: ${SG_NAME}"
+    log_dryrun "Would check for existing security group: ${SG_NAME}"
     EXISTING_SG="None"
 else
     EXISTING_SG=$(aws ec2 describe-security-groups \
@@ -102,8 +102,8 @@ if [ "$EXISTING_SG" != "None" ]; then
     log_warn "Security group '${SG_NAME}' already exists with ID: ${EXISTING_SG}"
     
     if [[ "$DRY_RUN" == "true" ]]; then
-        log_info "[DRY-RUN] Would prompt to delete and recreate security group"
-        log_info "[DRY-RUN] Assuming 'yes' for dry-run purposes"
+        log_dryrun "Would prompt to delete and recreate security group"
+        log_dryrun "Assuming 'yes' for dry-run purposes"
     else
         read -rp "Do you want to delete and recreate it? (yes/no) " response
         [[ "$response" == "yes" ]] || { log_info "Exiting without changes"; exit 0; }
@@ -121,10 +121,10 @@ fi
 log_info "[3/5] Creating security group: ${SG_NAME}"
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would create security group with:"
-    log_info "[DRY-RUN]   Name: ${SG_NAME}"
-    log_info "[DRY-RUN]   Description: ${SG_DESCRIPTION}"
-    log_info "[DRY-RUN]   VPC ID: ${VPC_ID}"
+    log_dryrun "Would create security group with:"
+    log_dryrun "  Name: ${SG_NAME}"
+    log_dryrun "  Description: ${SG_DESCRIPTION}"
+    log_dryrun "  VPC ID: ${VPC_ID}"
     SG_ID="sg-dry-run-example"
 else
     SG_ID=$(aws ec2 create-security-group \
@@ -146,10 +146,10 @@ log_info "✓ Security group created: ${SG_ID}"
 log_info "[4/5] Adding SSH ingress rule (port 22)"
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would add ingress rule:"
-    log_info "[DRY-RUN]   Protocol: tcp"
-    log_info "[DRY-RUN]   Port: 22"
-    log_info "[DRY-RUN]   CIDR: 0.0.0.0/0"
+    log_dryrun "Would add ingress rule:"
+    log_dryrun "  Protocol: tcp"
+    log_dryrun "  Port: 22"
+    log_dryrun "  CIDR: 0.0.0.0/0"
 else
     aws ec2 authorize-security-group-ingress \
         --group-id "${SG_ID}" \
@@ -166,10 +166,10 @@ fi
 log_info "[5/5] Adding HTTP ingress rule (port 80)"
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would add ingress rule:"
-    log_info "[DRY-RUN]   Protocol: tcp"
-    log_info "[DRY-RUN]   Port: 80"
-    log_info "[DRY-RUN]   CIDR: 0.0.0.0/0"
+    log_dryrun "Would add ingress rule:"
+    log_dryrun "  Protocol: tcp"
+    log_dryrun "  Port: 80"
+    log_dryrun "  CIDR: 0.0.0.0/0"
 else
     aws ec2 authorize-security-group-ingress \
         --group-id "${SG_ID}" \
@@ -193,10 +193,10 @@ log_info "VPC ID: ${VPC_ID}"
 log_info ""
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would display inbound rules"
-    log_info "[DRY-RUN] Expected rules:"
-    log_info "[DRY-RUN]   - SSH (22) from 0.0.0.0/0"
-    log_info "[DRY-RUN]   - HTTP (80) from 0.0.0.0/0"
+    log_dryrun "Would display inbound rules"
+    log_dryrun "Expected rules:"
+    log_dryrun "  - SSH (22) from 0.0.0.0/0"
+    log_dryrun "  - HTTP (80) from 0.0.0.0/0"
 else
     log_info "Inbound Rules:"
     aws ec2 describe-security-groups \
@@ -209,7 +209,7 @@ log_info "=========================================="
 
 # Step 7: Save to file
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would save security group ID to security_group_id.txt"
+    log_dryrun "Would save security group ID to security_group_id.txt"
 else
     echo "${SG_ID}" > security_group_id.txt
     log_info "Security group ID saved to security_group_id.txt"

@@ -1,6 +1,0 @@
-Welcome to the Automation Lab!
-This file was uploaded by an automated script.
-Created: Wed, Jan 21, 2026  7:51:09 AM
-Bucket: automation-lab-bucket-1768981859-azureadyramashertettehabot
-Region: eu-central-1
-User: azureadyramashertettehabot

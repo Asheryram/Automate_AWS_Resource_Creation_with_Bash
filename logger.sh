@@ -4,12 +4,13 @@
 # Default log file (can be overridden)
 LOG_FILE="${LOG_FILE:-./aws_project.log}"
 CONSOLE_LOG="${CONSOLE_LOG:-true}"   # Whether to print to console
-LOG_LEVEL="${LOG_LEVEL:-INFO}"       # Default level: DEBUG, INFO, WARN, ERROR
+LOG_LEVEL="${LOG_LEVEL:-INFO}"       # Default level: DEBUG, INFO, WARN, ERROR, DRYRUN
 
 # Convert level to numeric value for comparison
 level_to_num() {
     case "$1" in
         DEBUG) echo 1 ;;
+        DRYRUN) echo 1 ;;  # Same as DEBUG for filtering
         INFO)  echo 2 ;;
         WARN)  echo 3 ;;
         ERROR) echo 4 ;;
@@ -41,10 +42,11 @@ log_message() {
     # Print to console
     if [[ "$CONSOLE_LOG" == "true" ]]; then
         case "$level" in
-            DEBUG) echo -e "\e[34m$log_entry\e[0m" ;;    # Blue
-            INFO)  echo "$log_entry" ;;
-            WARN)  echo -e "\e[33m$log_entry\e[0m" ;;    # Yellow
-            ERROR) echo -e "\e[31m$log_entry\e[0m" ;;    # Red
+            DEBUG)  echo -e "\e[34m$log_entry\e[0m" ;;    # Blue
+            DRYRUN) echo -e "\e[35m$log_entry\e[0m" ;;    # Magenta/Purple
+            INFO)   echo "$log_entry" ;;
+            WARN)   echo -e "\e[33m$log_entry\e[0m" ;;    # Yellow
+            ERROR)  echo -e "\e[31m$log_entry\e[0m" ;;    # Red
             *) echo "$log_entry" ;;
         esac
     fi
@@ -54,7 +56,8 @@ log_message() {
 }
 
 # Helper functions for each log level
-log_debug() { log_message "DEBUG" "$1"; }
-log_info()  { log_message "INFO"  "$1"; }
-log_warn()  { log_message "WARN"  "$1"; }
-log_error() { log_message "ERROR" "$1"; }
+log_debug()  { log_message "DEBUG"  "$1"; }
+log_dryrun() { log_message "DRYRUN" "$1"; }
+log_info()   { log_message "INFO"   "$1"; }
+log_warn()   { log_message "WARN"   "$1"; }
+log_error()  { log_message "ERROR"  "$1"; }

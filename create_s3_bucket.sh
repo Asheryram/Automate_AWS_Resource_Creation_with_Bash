@@ -88,13 +88,13 @@ log_info "[1/5] Creating S3 bucket: ${BUCKET_NAME}"
 log_debug "Region: ${REGION}"
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would create S3 bucket with:"
-    log_info "[DRY-RUN]   Bucket Name: ${BUCKET_NAME}"
-    log_info "[DRY-RUN]   Region: ${REGION}"
+    log_dryrun "Would create S3 bucket with:"
+    log_dryrun "  Bucket Name: ${BUCKET_NAME}"
+    log_dryrun "  Region: ${REGION}"
     if [ "$REGION" == "us-east-1" ]; then
-        log_info "[DRY-RUN]   Configuration: Default (us-east-1)"
+        log_dryrun "  Configuration: Default (us-east-1)"
     else
-        log_info "[DRY-RUN]   Configuration: LocationConstraint=${REGION}"
+        log_dryrun "  Configuration: LocationConstraint=${REGION}"
     fi
 else
     # Handle us-east-1 special case
@@ -118,8 +118,8 @@ log_info "✓ Bucket created: ${BUCKET_NAME}"
 log_info "[2/5] Enabling versioning"
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would enable versioning on bucket: ${BUCKET_NAME}"
-    log_info "[DRY-RUN]   Versioning Status: Enabled"
+    log_dryrun "Would enable versioning on bucket: ${BUCKET_NAME}"
+    log_dryrun "  Versioning Status: Enabled"
 else
     aws s3api put-bucket-versioning \
         --bucket "${BUCKET_NAME}" \
@@ -134,9 +134,9 @@ log_info "✓ Versioning enabled"
 log_info "[3/5] Adding tags"
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would add tags to bucket:"
-    log_info "[DRY-RUN]   Project=AutomationLab"
-    log_info "[DRY-RUN]   Environment=Development"
+    log_dryrun "Would add tags to bucket:"
+    log_dryrun "  Project=AutomationLab"
+    log_dryrun "  Environment=Development"
 else
     aws s3api put-bucket-tagging \
         --bucket "${BUCKET_NAME}" \
@@ -151,8 +151,8 @@ log_info "✓ Tags added (Project=AutomationLab, Environment=Development)"
 log_info "[4/5] Creating sample file"
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would create sample file: ${SAMPLE_FILE}"
-    log_info "[DRY-RUN]   Content: Welcome message with metadata"
+    log_dryrun "Would create sample file: ${SAMPLE_FILE}"
+    log_dryrun "  Content: Welcome message with metadata"
 else
     cat > "${SAMPLE_FILE}" <<EOF
 Welcome to the Automation Lab!
@@ -172,7 +172,7 @@ log_info "✓ Sample file created: ${SAMPLE_FILE}"
 log_info "[5/5] Uploading file to S3"
 
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would upload ${SAMPLE_FILE} to s3://${BUCKET_NAME}/${SAMPLE_FILE}"
+    log_dryrun "Would upload ${SAMPLE_FILE} to s3://${BUCKET_NAME}/${SAMPLE_FILE}"
 else
     # Guard: Check sample file exists
     [[ -f "${SAMPLE_FILE}" ]] || error_exit "Sample file ${SAMPLE_FILE} does not exist"
@@ -206,7 +206,7 @@ log_info "=========================================="
 
 # Save bucket name
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_info "[DRY-RUN] Would save bucket name to s3_bucket_name.txt"
+    log_dryrun "Would save bucket name to s3_bucket_name.txt"
 else
     echo "${BUCKET_NAME}" > s3_bucket_name.txt
     log_info "Bucket name saved to s3_bucket_name.txt"
