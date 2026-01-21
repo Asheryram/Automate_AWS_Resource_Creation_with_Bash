@@ -4,69 +4,27 @@ set -euo pipefail
 ###############################################
 # Script: create_security_group.sh
 # Purpose: Create and configure security group using state manager
-# Author: [Your Name]
 ###############################################
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/logger.sh"
+source "${SCRIPT_DIR}/lib/common.sh"
 source "${SCRIPT_DIR}/state/state_manager.sh"
 
-# Parse arguments
-DRY_RUN=false
-while [[ $# -gt 0 ]]; do
-    case $1 in
-        --dry-run|--dry)
-            DRY_RUN=true
-            shift
-            ;;
-        -h|--help)
-            echo "Usage: $0 [--dry-run]"
-            echo "  --dry-run, --dry   Preview actions without making changes"
-            exit 0
-            ;;
-        *)
-            echo "Unknown option: $1"
-            exit 1
-            ;;
-    esac
-done
+# Parse arguments & check dependencies
+parse_dry_run_flag "$@"
+check_dependencies "aws" "jq"
 
 # Configuration
 SG_NAME="devops-sg"
-SSH_CIDR="${SSH_CIDR:-}"
-HTTP_CIDR="${HTTP_CIDR:-}"
+SSH_CIDR=$(get_cidr_or_env "SSH_CIDR" "SSH")
+HTTP_CIDR=$(get_cidr_or_env "HTTP_CIDR" "HTTP")
 
-log_info "=========================================="
-log_info "Security Group Creation Script Started"
-[[ "$DRY_RUN" == "true" ]] && log_warn "DRY-RUN MODE: No changes will be made"
-log_info "=========================================="
-
-# ------------------------------------------------
-# Get CIDR ranges if not provided
-# ------------------------------------------------
-if [[ -z "$SSH_CIDR" ]]; then
-  echo ""
-  read -rp "Enter CIDR block for SSH access (port 22) (e.g., 203.0.113.0/24 or 0.0.0.0/0 for anywhere): " SSH_CIDR
-  while [[ -z "$SSH_CIDR" ]]; do
-    log_error "CIDR block cannot be empty"
-    read -rp "Enter CIDR block for SSH access (port 22) (e.g., 203.0.113.0/24 or 0.0.0.0/0 for anywhere): " SSH_CIDR
-  done
-  log_info "SSH CIDR set to: $SSH_CIDR"
-fi
-
-if [[ -z "$HTTP_CIDR" ]]; then
-  echo ""
-  read -rp "Enter CIDR block for HTTP access (port 80) (e.g., 203.0.113.0/24 or 0.0.0.0/0 for anywhere): " HTTP_CIDR
-  while [[ -z "$HTTP_CIDR" ]]; do
-    log_error "CIDR block cannot be empty"
-    read -rp "Enter CIDR block for HTTP access (port 80) (e.g., 203.0.113.0/24 or 0.0.0.0/0 for anywhere): " HTTP_CIDR
-  done
-  log_info "HTTP CIDR set to: $HTTP_CIDR"
-fi
+print_header "Security Group Creation Script"
+[[ "$DRY_RUN" == "true" ]] && print_dry_run_notice
 
 # Initialize state backend
-state_init
-state_pull
+init_state
 
 # Check if the SG already exists in state
 EXISTING_SG_ID=$(jq -r ".resources.security_group | to_entries[] | select(.value.name==\"$SG_NAME\") | .key" "$STATE_LOCAL" 2>/dev/null || echo "")
@@ -78,8 +36,7 @@ fi
 
 # Dry-run summary
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_dryrun ""
-    log_dryrun "==================== DRY-RUN ===================="
+    print_dryrun_header
     log_dryrun "Resources that will be created:"
     log_dryrun ""
     log_dryrun "Security Group:"
@@ -98,8 +55,7 @@ if [[ "$DRY_RUN" == "true" ]]; then
     log_dryrun "  Local State:  $STATE_LOCAL"
     log_dryrun "  Remote State: s3://$STATE_BUCKET/$STATE_KEY"
     log_dryrun ""
-    log_dryrun "=================================================="
-    log_dryrun "No resources will be created in dry-run mode."
+    print_dryrun_footer
     exit 0
 fi
 
@@ -113,12 +69,11 @@ aws ec2 authorize-security-group-ingress --group-id "$SG_ID" --protocol tcp --po
 
 # Display SG details
 log_info ""
-log_info "=========================================="
-log_info "Security Group Created Successfully!"
+print_footer "Security Group Created Successfully"
 log_info "Security Group Name: $SG_NAME"
 log_info "Security Group ID: $SG_ID"
 log_info "Inbound Rules:"
 aws ec2 describe-security-groups --group-ids "$SG_ID" --query 'SecurityGroups[0].IpPermissions' --output table
-log_info "=========================================="
+print_footer "Setup Complete"
 
 log_info "Security group tracked in state backend"

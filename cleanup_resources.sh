@@ -4,7 +4,6 @@ set -euo pipefail
 ###############################################
 # Script: cleanup_resources.sh
 # Purpose: Clean up AWS resources tracked in remote S3 state.json
-# Author: [Your Name]
 ###############################################
 
 # =========================
@@ -12,47 +11,22 @@ set -euo pipefail
 # =========================
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/logger.sh"
+source "${SCRIPT_DIR}/lib/common.sh"
 source "${SCRIPT_DIR}/state/state_manager.sh"
 
-DRY_RUN="${DRY_RUN:-false}"
+# =========================
+# Parse CLI arguments & check dependencies
+# =========================
+parse_dry_run_flag "$@"
+check_dependencies "aws" "jq"
 
-# =========================
-# Parse CLI arguments
-# =========================
-while [[ $# -gt 0 ]]; do
-    case $1 in
-        --dry-run|--dry)
-            DRY_RUN="true"
-            shift
-            ;;
-        -h|--help)
-            echo "Usage: $0 [--dry-run]"
-            echo "  --dry-run, --dry   Preview actions without making changes"
-            exit 0
-            ;;
-        *)
-            echo "Unknown option: $1"
-            exit 1
-            ;;
-    esac
-done
-
-log_info "=========================================="
-log_info "AWS Resources Cleanup Script Started"
-[[ "$DRY_RUN" == "true" ]] && log_dryrun "DRY-RUN MODE: No changes will be made"
-log_info "=========================================="
-
-# =========================
-# Ensure AWS CLI and jq
-# =========================
-command -v aws >/dev/null || { log_error "AWS CLI required"; exit 1; }
-command -v jq >/dev/null || { log_error "jq required"; exit 1; }
+print_header "AWS Resources Cleanup Script"
+[[ "$DRY_RUN" == "true" ]] && print_dry_run_notice
 
 # =========================
 # Pull state from S3 (state_manager handles creation)
 # =========================
-state_init
-state_pull
+init_state
 
 STATE_FILE="$STATE_LOCAL"  # state_manager.sh manages the local copy
 
@@ -68,11 +42,7 @@ S3_BUCKETS=$(jq -r '.resources.s3 // {} | keys[]' "$STATE_FILE")
 # Dry-run summary
 # =========================
 if [[ "$DRY_RUN" == "true" ]]; then
-    log_dryrun ""
-    log_dryrun "=========================================="
-    log_dryrun "DRY-RUN SUMMARY"
-    log_dryrun "=========================================="
-
+    print_dryrun_header
     log_dryrun "Resources tracked in remote state.json that would be deleted:"
 
     log_dryrun "EC2 Instances:"
@@ -87,8 +57,7 @@ if [[ "$DRY_RUN" == "true" ]]; then
     log_dryrun "S3 Buckets:"
     [[ -n "$S3_BUCKETS" ]] && for b in $S3_BUCKETS; do log_dryrun "  - $b"; done || log_dryrun "  None"
 
-    log_dryrun "=========================================="
-    log_dryrun "No resources will be deleted in dry-run mode"
+    print_dryrun_footer
     exit 0
 fi
 
@@ -96,8 +65,7 @@ fi
 # Confirm deletion
 # =========================
 log_info ""
-log_info "=========================================="
-log_info "RESOURCES TO BE DELETED"
+print_header "RESOURCES TO BE DELETED"
 log_info "=========================================="
 
 log_info "EC2 Instances:"
@@ -238,4 +206,4 @@ done
 
 log_info "=========================================="
 log_info "Cleanup Complete!"
-log_info "=========================================="
+print_footer "Operation Finished"

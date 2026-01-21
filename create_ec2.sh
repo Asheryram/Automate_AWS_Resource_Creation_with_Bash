@@ -1,9 +1,8 @@
 #!/bin/bash
 
 ###############################################
-# Script: create_ec2_dynamic.sh
+# Script: create_ec2.sh
 # Purpose: Automate EC2 instance creation using state manager
-# Supports informative dry-run with metadata
 ###############################################
 
 set -euo pipefail
@@ -13,29 +12,15 @@ set -euo pipefail
 # ------------------------------------------------
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/logger.sh"
+source "${SCRIPT_DIR}/lib/common.sh"
 source "${SCRIPT_DIR}/state/state_manager.sh"
 
 # ------------------------------------------------
-# Args
+# Args & Guards
 # ------------------------------------------------
-DRY_RUN="${DRY_RUN:-false}"
-
-while [[ $# -gt 0 ]]; do
-  case $1 in
-    --dry-run|--dry)
-      DRY_RUN="true"
-      shift
-      ;;
-    -h|--help)
-      echo "Usage: $0 [--dry-run]"
-      exit 0
-      ;;
-    *)
-      echo "Unknown option: $1"
-      exit 1
-      ;;
-  esac
-done
+parse_dry_run_flag "$@"
+check_dependencies "aws" "jq"
+check_aws_credentials
 
 # ------------------------------------------------
 # Config
@@ -44,44 +29,19 @@ INSTANCE_TYPE="${INSTANCE_TYPE:-t2.micro}"
 AWS_REGION="${AWS_REGION:-eu-central-1}"
 TAG_PROJECT="${TAG_PROJECT:-AutomationLab}"
 SG_NAME="${SG_NAME:-devops-sg}"
-SSH_CIDR="${SSH_CIDR:-}"
+SSH_CIDR=$(get_cidr_or_env "SSH_CIDR" "SSH")
 
-log_info "=========================================="
-log_info "EC2 Creation via State Manager"
-[[ "$DRY_RUN" == "true" ]] && log_warn "DRY-RUN MODE ENABLED"
-log_info "=========================================="
+print_header "EC2 Creation via State Manager"
+[[ "$DRY_RUN" == "true" ]] && print_dry_run_notice
 
-# ------------------------------------------------
-# Get SSH CIDR if not provided
-# ------------------------------------------------
-if [[ -z "$SSH_CIDR" ]]; then
-  echo ""
-  read -rp "Enter CIDR block for SSH access (e.g., 203.0.113.0/24 or 0.0.0.0/0 for anywhere): " SSH_CIDR
-  while [[ -z "$SSH_CIDR" ]]; do
-    log_error "CIDR block cannot be empty"
-    read -rp "Enter CIDR block for SSH access (e.g., 203.0.113.0/24 or 0.0.0.0/0 for anywhere): " SSH_CIDR
-  done
-  log_info "SSH CIDR set to: $SSH_CIDR"
-fi
-
-# ------------------------------------------------
-# Guards
-# ------------------------------------------------
-command -v aws >/dev/null || { log_error "AWS CLI missing"; exit 1; }
-command -v jq  >/dev/null || { log_error "jq missing"; exit 1; }
-aws sts get-caller-identity >/dev/null || { log_error "AWS credentials missing"; exit 1; }
-
-# ------------------------------------------------
 # Initialize state (local + remote)
-# ------------------------------------------------
-state_init
-state_pull
+init_state
 
 # ------------------------------------------------
 # Dry-run summary
 # ------------------------------------------------
 if [[ "$DRY_RUN" == "true" ]]; then
-  log_dryrun "==================== DRY-RUN ===================="
+  print_dryrun_header
   log_dryrun "The script will perform the following actions:"
 
   # Step 1: Resolve AMI
@@ -145,8 +105,7 @@ if [[ "$DRY_RUN" == "true" ]]; then
     log_dryrun "   New instance will be created with above configuration (ID: known after apply)"
   fi
 
-  log_dryrun "=================================================="
-  log_dryrun "No resources will be created or modified in dry-run mode."
+  print_dryrun_footer
   exit 0
 fi
 
@@ -213,8 +172,7 @@ PRIVATE_IP=$(aws ec2 describe-instances \
 # ------------------------------------------------
 # Output
 # ------------------------------------------------
-log_info "=========================================="
-log_info "EC2 Created & Tracked in State"
+print_footer "EC2 Created & Tracked in State"
 log_info "Instance ID: $INSTANCE_ID"
 log_info "Public IP: $PUBLIC_IP"
 log_info "Private IP: $PRIVATE_IP"
@@ -225,5 +183,5 @@ log_info "Security Group: $SG_ID"
   && log_info "SSH: ssh -i $KEY_NAME.pem ec2-user@$PUBLIC_IP" \
   || log_info "SSH: ssh -i $KEY_NAME.pem ec2-user@$PRIVATE_IP"
 
-log_info "=========================================="
+print_footer "Setup Complete"
 log_info "Script completed successfully"

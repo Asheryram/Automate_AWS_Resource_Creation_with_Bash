@@ -12,29 +12,15 @@ set -euo pipefail
 # ------------------------------------------------
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/logger.sh"
+source "${SCRIPT_DIR}/lib/common.sh"
 source "${SCRIPT_DIR}/state/state_manager.sh"
 
 # ------------------------------------------------
-# Args
+# Args & Guards
 # ------------------------------------------------
-DRY_RUN="${DRY_RUN:-false}"
-
-while [[ $# -gt 0 ]]; do
-  case $1 in
-    --dry-run|--dry)
-      DRY_RUN="true"
-      shift
-      ;;
-    -h|--help)
-      echo "Usage: $0 [--dry-run]"
-      exit 0
-      ;;
-    *)
-      echo "Unknown option: $1"
-      exit 1
-      ;;
-  esac
-done
+parse_dry_run_flag "$@"
+check_dependencies "aws" "jq"
+check_aws_credentials
 
 # ------------------------------------------------
 # Config
@@ -44,22 +30,14 @@ SAMPLE_FILE="welcome.txt"
 CLEAN_USER=$(whoami | tr -cd '[:alnum:]' | tr '[:upper:]' '[:lower:]')
 BUCKET_NAME="automation-lab-bucket-$(date +%s)-${CLEAN_USER}"
 
-log_info "=========================================="
-log_info "S3 Bucket Creation via State Manager"
-[[ "$DRY_RUN" == "true" ]] && log_warn "DRY-RUN MODE ENABLED"
-log_info "=========================================="
-
-# ------------------------------------------------
-# Guards
-# ------------------------------------------------
-command -v aws >/dev/null || { log_error "AWS CLI missing"; exit 1; }
-aws sts get-caller-identity >/dev/null || { log_error "AWS credentials missing"; exit 1; }
+print_header "S3 Bucket Creation via State Manager"
+[[ "$DRY_RUN" == "true" ]] && print_dry_run_notice
 
 # ------------------------------------------------
 # Dry-run summary
 # ------------------------------------------------
 if [[ "$DRY_RUN" == "true" ]]; then
-  log_dryrun "==================== DRY-RUN ===================="
+  print_dryrun_header
   log_dryrun "Resources that will be created:"
   log_dryrun ""
   log_dryrun "S3 Bucket:"
@@ -74,16 +52,14 @@ if [[ "$DRY_RUN" == "true" ]]; then
   log_dryrun "  Filename: $SAMPLE_FILE"
   log_dryrun "  Location: s3://${BUCKET_NAME}/${SAMPLE_FILE}"
   log_dryrun ""
-  log_dryrun "=================================================="
-  log_dryrun "No resources will be created in dry-run mode."
+  print_dryrun_footer
   exit 0
 fi
 
 # ------------------------------------------------
 # State init
 # ------------------------------------------------
-state_init
-state_pull
+init_state
 
 # ------------------------------------------------
 # Step 1: Create bucket
@@ -150,12 +126,11 @@ s3_track "$BUCKET_NAME"
 # ------------------------------------------------
 # Output
 # ------------------------------------------------
-log_info "=========================================="
-log_info "S3 Bucket Created & Tracked"
+print_footer "S3 Bucket Created & Tracked"
 log_info "Bucket: $BUCKET_NAME"
 log_info "Region: $REGION"
 log_info "Versioning: Enabled"
-log_info "=========================================="
+print_footer "Bucket created successfully"
 
 echo "$BUCKET_NAME" > s3_bucket_name.txt
 log_info "Bucket name saved to s3_bucket_name.txt"
