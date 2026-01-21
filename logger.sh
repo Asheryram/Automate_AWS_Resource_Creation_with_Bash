@@ -9,8 +9,8 @@ LOG_LEVEL="${LOG_LEVEL:-INFO}"       # Default level: DEBUG, INFO, WARN, ERROR, 
 # Convert level to numeric value for comparison
 level_to_num() {
     case "$1" in
-        DEBUG) echo 1 ;;
-        DRYRUN) echo 1 ;;  # Same as DEBUG for filtering
+        DEBUG) echo 0 ;;
+        DRYRUN) echo 2 ;;  # Same as DEBUG for filtering
         INFO)  echo 2 ;;
         WARN)  echo 3 ;;
         ERROR) echo 4 ;;

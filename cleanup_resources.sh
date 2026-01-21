@@ -11,7 +11,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/logger.sh"
 
 # Parse command-line arguments
-DRY_RUN="${DRY_RUN:-false}"  # Default from environment variable
+DRY_RUN="${DRY_RUN:-false}"
 while [[ $# -gt 0 ]]; do
     case $1 in
         --dry-run|--dry)
@@ -47,13 +47,58 @@ command -v aws >/dev/null 2>&1 || { log_error "AWS CLI is not installed. Please 
 # Guard: Check AWS credentials are configured
 aws sts get-caller-identity >/dev/null 2>&1 || { log_error "AWS credentials not configured. Run 'aws configure' first."; exit 1; }
 
+###############################################
+# Dry-Run Summary Report
+###############################################
+if [[ "$DRY_RUN" == "true" ]]; then
+    log_info ""
+    log_info "DRY-RUN SUMMARY REPORT"
+    log_info "=========================================="
+    log_dryrun "Resources that would be deleted:"
+    log_dryrun ""
+    log_dryrun "1. EC2 INSTANCES:"
+    log_dryrun "   - Query for instances tagged: Project=AutomationLab"
+    log_dryrun "   - States: running, stopped, pending"
+    log_dryrun "   - Terminate all matching instances"
+    log_dryrun "   - Wait for termination to complete"
+    log_dryrun ""
+    log_dryrun "2. KEY PAIRS:"
+    log_dryrun "   - Query for key pairs: automation-lab-key-*"
+    log_dryrun "   - Delete each key pair from AWS"
+    log_dryrun "   - Delete local .pem files if they exist"
+    log_dryrun ""
+    log_dryrun "3. SECURITY GROUPS:"
+    log_dryrun "   - Query for security group: devops-sg"
+    log_dryrun "   - Attempt deletion with retry (up to 5 attempts)"
+    log_dryrun "   - Wait 5s between retries if in use"
+    log_dryrun ""
+    log_dryrun "4. S3 BUCKETS:"
+    log_dryrun "   - Query for buckets: automation-lab-bucket-*"
+    log_dryrun "   - For each bucket:"
+    log_dryrun "     a) Empty all objects (recursive delete)"
+    log_dryrun "     b) Delete all object versions"
+    log_dryrun "     c) Delete all delete markers"
+    log_dryrun "     d) Abort all multipart uploads"
+    log_dryrun "     e) Delete the bucket itself"
+    log_dryrun ""
+    log_dryrun "5. LOCAL FILES:"
+    log_dryrun "   - ec2_instance_info.txt"
+    log_dryrun "   - security_group_id.txt"
+    log_dryrun "   - s3_bucket_name.txt"
+    log_dryrun "   - welcome.txt"
+    log_dryrun ""
+    log_dryrun "Cleanup process includes:"
+    log_dryrun "  - Comprehensive error handling"
+    log_dryrun "  - Retry logic for in-use resources"
+    log_dryrun "  - Versioning and multipart upload cleanup"
+    log_dryrun "  - Detailed logging of all operations"
+    log_info "=========================================="
+    log_info "No actual resources deleted in dry-run mode"
+    exit 0
+fi
+
 # Function to confirm deletion
 confirm_deletion() {
-    if [[ "$DRY_RUN" == "true" ]]; then
-        log_dryrun "Skipping confirmation prompt"
-        return 0
-    fi
-    
     read -rp "Do you want to proceed with cleanup? (yes/no) " response
     [[ "$response" == "yes" ]] || { log_info "Cleanup cancelled by user"; exit 0; }
     log_info "Cleanup confirmed, proceeding..."
@@ -65,35 +110,21 @@ confirm_deletion
 ###############################################
 log_info "[1/4] Searching for EC2 instances with tag Project=AutomationLab"
 
-if [[ "$DRY_RUN" == "true" ]]; then
-    log_dryrun "Would query for instances with filters:"
-    log_dryrun "  Tag: Project=AutomationLab"
-    log_dryrun "  State: running,stopped,pending"
-    INSTANCES="i-example1 i-example2"  # Example instances
-    log_dryrun "Would find instances: ${INSTANCES}"
-else
-    INSTANCES=$(aws ec2 describe-instances \
-        --filters "Name=tag:Project,Values=AutomationLab" "Name=instance-state-name,Values=running,stopped,pending" \
-        --query 'Reservations[*].Instances[*].InstanceId' \
-        --output text 2>/dev/null)
-fi
+INSTANCES=$(aws ec2 describe-instances \
+    --filters "Name=tag:Project,Values=AutomationLab" "Name=instance-state-name,Values=running,stopped,pending" \
+    --query 'Reservations[*].Instances[*].InstanceId' \
+    --output text 2>/dev/null)
 
-# Guard: Check if instances exist
 [[ -n "$INSTANCES" ]] || log_info "No instances found to terminate"
 
 if [ -n "$INSTANCES" ]; then
     log_info "Found instances: $INSTANCES"
+    log_info "Terminating instances..."
     
-    if [[ "$DRY_RUN" == "true" ]]; then
-        log_dryrun "Would terminate instances: ${INSTANCES}"
-        log_dryrun "Would wait for instances to terminate"
-    else
-        log_info "Terminating instances..."
-        aws ec2 terminate-instances --instance-ids $INSTANCES >/dev/null 2>&1 || log_error "Failed to terminate instances"
-        
-        log_info "Waiting for instances to terminate..."
-        aws ec2 wait instance-terminated --instance-ids $INSTANCES 2>/dev/null || log_warn "Instance termination wait timed out or failed"
-    fi
+    aws ec2 terminate-instances --instance-ids $INSTANCES >/dev/null 2>&1 || log_error "Failed to terminate instances"
+    
+    log_info "Waiting for instances to terminate..."
+    aws ec2 wait instance-terminated --instance-ids $INSTANCES 2>/dev/null || log_warn "Instance termination wait timed out or failed"
     
     log_info "✓ All instances terminated successfully"
 fi
@@ -103,33 +134,20 @@ fi
 ###############################################
 log_info "[2/4] Searching for automation lab key pairs"
 
-if [[ "$DRY_RUN" == "true" ]]; then
-    log_dryrun "Would query for key pairs matching: automation-lab-key-*"
-    KEY_PAIRS="automation-lab-key-example1 automation-lab-key-example2"
-    log_dryrun "Would find key pairs: ${KEY_PAIRS}"
-else
-    KEY_PAIRS=$(aws ec2 describe-key-pairs \
-        --filters "Name=key-name,Values=automation-lab-key-*" \
-        --query 'KeyPairs[*].KeyName' \
-        --output text 2>/dev/null)
-fi
+KEY_PAIRS=$(aws ec2 describe-key-pairs \
+    --filters "Name=key-name,Values=automation-lab-key-*" \
+    --query 'KeyPairs[*].KeyName' \
+    --output text 2>/dev/null)
 
-# Guard: Check if key pairs exist
 [[ -n "$KEY_PAIRS" ]] || log_info "No key pairs found"
 
 for key in $KEY_PAIRS; do
     log_info "Deleting key pair: $key"
+    aws ec2 delete-key-pair --key-name "$key" 2>/dev/null || log_warn "Failed to delete key pair: $key"
     
-    if [[ "$DRY_RUN" == "true" ]]; then
-        log_dryrun "Would delete key pair: ${key}"
-        log_dryrun "Would delete local file: ${key}.pem (if exists)"
-    else
-        aws ec2 delete-key-pair --key-name "$key" 2>/dev/null || log_warn "Failed to delete key pair: $key"
-        
-        if [[ -f "${key}.pem" ]]; then
-            rm "${key}.pem"
-            log_info "  ✓ Deleted local file: ${key}.pem"
-        fi
+    if [[ -f "${key}.pem" ]]; then
+        rm "${key}.pem"
+        log_info "  ✓ Deleted local file: ${key}.pem"
     fi
 done
 
@@ -138,69 +156,38 @@ done
 ###############################################
 log_info "[3/4] Searching for security group: devops-sg"
 
-if [[ "$DRY_RUN" == "true" ]]; then
-    log_dryrun "Would query for security group: devops-sg"
-    SG_ID="sg-dry-run-example"
-    log_dryrun "Would find security group: ${SG_ID}"
-else
-    SG_ID=$(aws ec2 describe-security-groups \
-        --filters "Name=group-name,Values=devops-sg" \
-        --query 'SecurityGroups[0].GroupId' \
-        --output text 2>/dev/null || echo "None")
-fi
+SG_ID=$(aws ec2 describe-security-groups \
+    --filters "Name=group-name,Values=devops-sg" \
+    --query 'SecurityGroups[0].GroupId' \
+    --output text 2>/dev/null || echo "None")
 
-# Guard: Check if security group exists
 [[ "$SG_ID" != "None" ]] || log_info "No security group found"
 
 if [ "$SG_ID" != "None" ]; then
-    if [[ "$DRY_RUN" == "true" ]]; then
-        log_dryrun "Would attempt to delete security group: ${SG_ID}"
-        log_dryrun "Would retry up to 5 times if in use"
-    else
-        # Retry deletion a few times if in use
-        MAX_RETRIES=5
-        for i in $(seq 1 $MAX_RETRIES); do
-            aws ec2 delete-security-group --group-id "$SG_ID" 2>/dev/null && break
-            log_warn "Attempt $i: Security group still in use. Retrying in 5s..."
-            sleep 5
-        done
+    MAX_RETRIES=5
+    for i in $(seq 1 $MAX_RETRIES); do
+        aws ec2 delete-security-group --group-id "$SG_ID" 2>/dev/null && break
+        log_warn "Attempt $i: Security group still in use. Retrying in 5s..."
+        sleep 5
+    done
 
-        # Final check
-        aws ec2 describe-security-groups --group-ids "$SG_ID" >/dev/null 2>&1 && log_warn "Failed to delete security group (may still be in use)"
-    fi
-    
+    aws ec2 describe-security-groups --group-ids "$SG_ID" >/dev/null 2>&1 && log_warn "Failed to delete security group (may still be in use)"
     log_info "✓ Security group deletion attempted"
 fi
 
 ###############################################
-# Step 4: Delete S3 Buckets (handles versions, delete markers, multipart uploads)
+# Step 4: Delete S3 Buckets
 ###############################################
 log_info "[4/4] Searching for automation lab S3 buckets"
 
-if [[ "$DRY_RUN" == "true" ]]; then
-    log_dryrun "Would query for buckets matching: automation-lab-bucket-*"
-    BUCKETS="automation-lab-bucket-example1 automation-lab-bucket-example2"
-    log_dryrun "Would find buckets: ${BUCKETS}"
-else
-    BUCKETS=$(aws s3api list-buckets \
-        --query 'Buckets[?starts_with(Name, `automation-lab-bucket-`)].Name' \
-        --output text 2>/dev/null)
-fi
+BUCKETS=$(aws s3api list-buckets \
+    --query 'Buckets[?starts_with(Name, `automation-lab-bucket-`)].Name' \
+    --output text 2>/dev/null)
 
-# Guard: Check if buckets exist
 [[ -n "$BUCKETS" ]] || log_info "No S3 buckets found"
 
 for bucket in $BUCKETS; do
     log_info "Processing bucket: $bucket"
-
-    if [[ "$DRY_RUN" == "true" ]]; then
-        log_dryrun "Would empty bucket: ${bucket}"
-        log_dryrun "Would delete all object versions"
-        log_dryrun "Would delete all delete markers"
-        log_dryrun "Would abort all multipart uploads"
-        log_dryrun "Would delete bucket: ${bucket}"
-        continue
-    fi
 
     # Empty all objects
     aws s3 rm "s3://${bucket}" --recursive >/dev/null 2>&1 && log_info "  ✓ Bucket emptied" || log_warn "  Failed to empty bucket"
@@ -211,7 +198,6 @@ for bucket in $BUCKETS; do
     if [ -n "$VERSIONS" ]; then
         log_info "  Deleting versioned objects..."
         while read -r key version; do
-            # Guard: Skip if key or version is empty
             [[ -n "$key" && -n "$version" ]] || continue
             
             aws s3api delete-object --bucket "$bucket" --key "$key" --version-id "$version" >/dev/null 2>&1 \
@@ -226,7 +212,6 @@ for bucket in $BUCKETS; do
     if [ -n "$DELETE_MARKERS" ]; then
         log_info "  Deleting delete markers..."
         while read -r key version; do
-            # Guard: Skip if key or version is empty
             [[ -n "$key" && -n "$version" ]] || continue
             
             aws s3api delete-object --bucket "$bucket" --key "$key" --version-id "$version" >/dev/null 2>&1 \
@@ -240,7 +225,6 @@ for bucket in $BUCKETS; do
     if [ -n "$UPLOADS" ]; then
         log_info "  Aborting multipart uploads..."
         while read -r upload; do
-            # Guard: Skip if upload ID is empty
             [[ -n "$upload" ]] || continue
             
             KEY=$(aws s3api list-multipart-uploads --bucket "$bucket" \
@@ -263,16 +247,8 @@ done
 log_info ""
 log_info "Cleaning up local tracking files..."
 
-if [[ "$DRY_RUN" == "true" ]]; then
-    log_dryrun "Would delete local files:"
-    log_dryrun "  - ec2_instance_info.txt"
-    log_dryrun "  - security_group_id.txt"
-    log_dryrun "  - s3_bucket_name.txt"
-    log_dryrun "  - welcome.txt"
-else
-    rm -f ec2_instance_info.txt security_group_id.txt s3_bucket_name.txt welcome.txt
-    log_info "✓ Local files cleaned up"
-fi
+rm -f ec2_instance_info.txt security_group_id.txt s3_bucket_name.txt welcome.txt
+log_info "✓ Local files cleaned up"
 
 log_info ""
 log_info "=========================================="

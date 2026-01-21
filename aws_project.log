@@ -54,3 +54,100 @@
 [2026-01-21 08:16:04] [INFO]   https://automation-lab-bucket-1768983360-azureadyramashertettehabot.s3.eu-central-1.amazonaws.com/welcome.txt
 [2026-01-21 08:16:04] [INFO] ==========================================
 [2026-01-21 08:16:04] [INFO] Script completed successfully
+[2026-01-21 08:25:01] [INFO] ==========================================
+[2026-01-21 08:25:01] [INFO] S3 Bucket Creation Script Started
+[2026-01-21 08:25:02] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 08:25:02] [INFO] ==========================================
+[2026-01-21 08:25:05] [INFO] 
+[2026-01-21 08:25:05] [INFO] DRY-RUN SUMMARY REPORT
+[2026-01-21 08:25:05] [INFO] ==========================================
+[2026-01-21 08:25:06] [INFO] ==========================================
+[2026-01-21 08:25:06] [INFO] No actual resources created in dry-run mode
+[2026-01-21 08:27:57] [INFO] ==========================================
+[2026-01-21 08:27:57] [INFO] S3 Bucket Creation Script Started
+[2026-01-21 08:27:57] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 08:27:57] [INFO] ==========================================
+[2026-01-21 08:27:59] [INFO] 
+[2026-01-21 08:27:59] [INFO] DRY-RUN SUMMARY REPORT
+[2026-01-21 08:27:59] [INFO] ==========================================
+[2026-01-21 08:28:00] [INFO] ==========================================
+[2026-01-21 08:28:00] [INFO] No actual resources created in dry-run mode
+[2026-01-21 08:31:06] [INFO] ==========================================
+[2026-01-21 08:31:06] [INFO] S3 Bucket Creation Script Started
+[2026-01-21 08:31:06] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 08:31:06] [INFO] ==========================================
+[2026-01-21 08:31:08] [INFO] 
+[2026-01-21 08:31:08] [INFO] DRY-RUN SUMMARY REPORT
+[2026-01-21 08:31:08] [INFO] ==========================================
+[2026-01-21 08:31:08] [DRYRUN] Actions that would be performed:
+[2026-01-21 08:31:08] [DRYRUN] 
+[2026-01-21 08:31:08] [DRYRUN] 1. Create S3 bucket: automation-lab-bucket-1768984266-azureadyramashertettehabot
+[2026-01-21 08:31:09] [DRYRUN]    - Region: eu-central-1
+[2026-01-21 08:31:09] [DRYRUN]    - Configuration: LocationConstraint=eu-central-1
+[2026-01-21 08:31:09] [DRYRUN] 
+[2026-01-21 08:31:09] [DRYRUN] 2. Enable versioning on bucket
+[2026-01-21 08:31:09] [DRYRUN] 
+[2026-01-21 08:31:09] [DRYRUN] 3. Apply tags:
+[2026-01-21 08:31:09] [DRYRUN]    - Project=AutomationLab
+[2026-01-21 08:31:09] [DRYRUN]    - Environment=Development
+[2026-01-21 08:31:09] [DRYRUN] 
+[2026-01-21 08:31:09] [DRYRUN] 4. Create local sample file: welcome.txt
+[2026-01-21 08:31:09] [DRYRUN]    - Contains: Welcome message with metadata
+[2026-01-21 08:31:09] [DRYRUN] 
+[2026-01-21 08:31:09] [DRYRUN] 5. Upload welcome.txt to s3://automation-lab-bucket-1768984266-azureadyramashertettehabot/
+[2026-01-21 08:31:09] [DRYRUN] 
+[2026-01-21 08:31:09] [DRYRUN] 6. Save bucket name to s3_bucket_name.txt
+[2026-01-21 08:31:09] [DRYRUN] 
+[2026-01-21 08:31:09] [DRYRUN] Expected output:
+[2026-01-21 08:31:10] [DRYRUN]   - Bucket URL: https://automation-lab-bucket-1768984266-azureadyramashertettehabot.s3.eu-central-1.amazonaws.com/welcome.txt
+[2026-01-21 08:31:10] [DRYRUN]   - Versioning: Enabled
+[2026-01-21 08:31:10] [INFO] ==========================================
+[2026-01-21 08:31:10] [INFO] No actual resources created in dry-run mode
+[2026-01-21 08:32:00] [INFO] ==========================================
+[2026-01-21 08:32:00] [INFO] AWS Resources Cleanup Script Started
+[2026-01-21 08:32:00] [WARN] DRY-RUN MODE: No changes will be made
+[2026-01-21 08:32:01] [INFO] ==========================================
+[2026-01-21 08:32:01] [INFO] 
+[2026-01-21 08:32:02] [INFO] 
+[2026-01-21 08:32:02] [INFO] DRY-RUN SUMMARY REPORT
+[2026-01-21 08:32:02] [INFO] ==========================================
+[2026-01-21 08:32:03] [DRYRUN] Resources that would be deleted:
+[2026-01-21 08:32:03] [DRYRUN] 
+[2026-01-21 08:32:03] [DRYRUN] 1. EC2 INSTANCES:
+[2026-01-21 08:32:03] [DRYRUN]    - Query for instances tagged: Project=AutomationLab
+[2026-01-21 08:32:03] [DRYRUN]    - States: running, stopped, pending
+[2026-01-21 08:32:03] [DRYRUN]    - Terminate all matching instances
+[2026-01-21 08:32:03] [DRYRUN]    - Wait for termination to complete
+[2026-01-21 08:32:03] [DRYRUN] 
+[2026-01-21 08:32:03] [DRYRUN] 2. KEY PAIRS:
+[2026-01-21 08:32:03] [DRYRUN]    - Query for key pairs: automation-lab-key-*
+[2026-01-21 08:32:03] [DRYRUN]    - Delete each key pair from AWS
+[2026-01-21 08:32:03] [DRYRUN]    - Delete local .pem files if they exist
+[2026-01-21 08:32:03] [DRYRUN] 
+[2026-01-21 08:32:03] [DRYRUN] 3. SECURITY GROUPS:
+[2026-01-21 08:32:03] [DRYRUN]    - Query for security group: devops-sg
+[2026-01-21 08:32:03] [DRYRUN]    - Attempt deletion with retry (up to 5 attempts)
+[2026-01-21 08:32:04] [DRYRUN]    - Wait 5s between retries if in use
+[2026-01-21 08:32:04] [DRYRUN] 
+[2026-01-21 08:32:04] [DRYRUN] 4. S3 BUCKETS:
+[2026-01-21 08:32:04] [DRYRUN]    - Query for buckets: automation-lab-bucket-*
+[2026-01-21 08:32:04] [DRYRUN]    - For each bucket:
+[2026-01-21 08:32:04] [DRYRUN]      a) Empty all objects (recursive delete)
+[2026-01-21 08:32:04] [DRYRUN]      b) Delete all object versions
+[2026-01-21 08:32:04] [DRYRUN]      c) Delete all delete markers
+[2026-01-21 08:32:04] [DRYRUN]      d) Abort all multipart uploads
+[2026-01-21 08:32:04] [DRYRUN]      e) Delete the bucket itself
+[2026-01-21 08:32:04] [DRYRUN] 
+[2026-01-21 08:32:04] [DRYRUN] 5. LOCAL FILES:
+[2026-01-21 08:32:04] [DRYRUN]    - ec2_instance_info.txt
+[2026-01-21 08:32:04] [DRYRUN]    - security_group_id.txt
+[2026-01-21 08:32:04] [DRYRUN]    - s3_bucket_name.txt
+[2026-01-21 08:32:04] [DRYRUN]    - welcome.txt
+[2026-01-21 08:32:04] [DRYRUN] 
+[2026-01-21 08:32:05] [DRYRUN] Cleanup process includes:
+[2026-01-21 08:32:05] [DRYRUN]   - Comprehensive error handling
+[2026-01-21 08:32:05] [DRYRUN]   - Retry logic for in-use resources
+[2026-01-21 08:32:05] [DRYRUN]   - Versioning and multipart upload cleanup
+[2026-01-21 08:32:05] [DRYRUN]   - Detailed logging of all operations
+[2026-01-21 08:32:05] [INFO] ==========================================
+[2026-01-21 08:32:05] [INFO] No actual resources deleted in dry-run mode
