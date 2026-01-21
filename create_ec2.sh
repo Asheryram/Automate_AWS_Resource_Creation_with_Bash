@@ -12,13 +12,37 @@ source "${SCRIPT_DIR}/logger.sh"
 
 set -euo pipefail  # Exit on any error, unset variable usage, and catch pipe failures
 
+# Parse command-line arguments
+DRY_RUN="${DRY_RUN:-false}"  # Default from environment variable
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --dry-run|--dry)
+            DRY_RUN="true"
+            shift
+            ;;
+        -h|--help)
+            echo "Usage: $0 [--dry-run]"
+            echo "  --dry-run, --dry   Preview actions without making changes"
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+    esac
+done
+
 # Configurable Variables
-INSTANCE_TYPE="${INSTANCE_TYPE:-t2.micro}"  # default if not set
-REGION="${REGION:-eu-central-1}"           # default region
-TAG_PROJECT="${TAG_PROJECT:-AutomationLab}" 
+INSTANCE_TYPE="${INSTANCE_TYPE:-t2.micro}"
+REGION="${REGION:-eu-central-1}"
+TAG_PROJECT="${TAG_PROJECT:-AutomationLab}"
 
 log_info "=========================================="
 log_info "EC2 Instance Creation Script Started"
+if [[ "$DRY_RUN" == "true" ]]; then
+    log_warn "DRY-RUN MODE: No changes will be made"
+fi
 log_info "=========================================="
 
 # Error handler
@@ -27,18 +51,39 @@ error_exit() {
     exit 1
 }
 
+# Guard: Check AWS CLI is installed
+command -v aws >/dev/null 2>&1 || error_exit "AWS CLI is not installed. Please install it first."
+
+# Guard: Check AWS credentials are configured
+aws sts get-caller-identity >/dev/null 2>&1 || error_exit "AWS credentials not configured. Run 'aws configure' first."
+
+# Guard: Validate region
+[[ -n "$REGION" ]] || error_exit "Region cannot be empty"
+
+# Guard: Validate instance type
+[[ -n "$INSTANCE_TYPE" ]] || error_exit "Instance type cannot be empty"
+
 ###############################################
 # Step 1: Determine latest Amazon Linux 2 AMI
 ###############################################
 log_info "[1/5] Retrieving latest Amazon Linux 2 AMI in ${REGION}..."
-AMI_ID=$(aws ec2 describe-images \
-    --region "${REGION}" \
-    --owners amazon \
-    --filters "Name=name,Values=amzn2-ami-hvm-*-x86_64-gp2" "Name=state,Values=available" \
-    --query 'Images | sort_by(@, &CreationDate) | [-1].ImageId' \
-    --output text 2>/dev/null)
 
-[[ -n "$AMI_ID" ]] || error_exit "Failed to find an Amazon Linux 2 AMI in ${REGION}"
+if [[ "$DRY_RUN" == "true" ]]; then
+    log_info "[DRY-RUN] Would query for latest Amazon Linux 2 AMI"
+    log_info "[DRY-RUN]   Filters: amzn2-ami-hvm-*-x86_64-gp2, state=available"
+    AMI_ID="ami-dry-run-example"
+else
+    AMI_ID=$(aws ec2 describe-images \
+        --region "${REGION}" \
+        --owners amazon \
+        --filters "Name=name,Values=amzn2-ami-hvm-*-x86_64-gp2" "Name=state,Values=available" \
+        --query 'Images | sort_by(@, &CreationDate) | [-1].ImageId' \
+        --output text 2>/dev/null)
+
+    # Guard: AMI must be found
+    [[ -n "$AMI_ID" ]] || error_exit "Failed to find an Amazon Linux 2 AMI in ${REGION}"
+fi
+
 log_info "✓ Latest AMI found: ${AMI_ID}"
 
 ###############################################
@@ -47,13 +92,21 @@ log_info "✓ Latest AMI found: ${AMI_ID}"
 KEY_NAME="automation-lab-key-$(date +%s)"
 log_info "[2/5] Creating key pair: ${KEY_NAME}"
 
-aws ec2 create-key-pair \
-    --key-name "${KEY_NAME}" \
-    --region "${REGION}" \
-    --query 'KeyMaterial' \
-    --output text > "${KEY_NAME}.pem" 2>/dev/null || error_exit "Failed to create key pair"
+if [[ "$DRY_RUN" == "true" ]]; then
+    log_info "[DRY-RUN] Would create key pair:"
+    log_info "[DRY-RUN]   Key Name: ${KEY_NAME}"
+    log_info "[DRY-RUN]   File: ${KEY_NAME}.pem"
+    log_info "[DRY-RUN]   Permissions: 400"
+else
+    aws ec2 create-key-pair \
+        --key-name "${KEY_NAME}" \
+        --region "${REGION}" \
+        --query 'KeyMaterial' \
+        --output text > "${KEY_NAME}.pem" 2>/dev/null || error_exit "Failed to create key pair"
 
-chmod 400 "${KEY_NAME}.pem" || error_exit "Failed to set permissions on ${KEY_NAME}.pem"
+    chmod 400 "${KEY_NAME}.pem" || error_exit "Failed to set permissions on ${KEY_NAME}.pem"
+fi
+
 log_info "✓ Key pair created and saved to ${KEY_NAME}.pem"
 
 ###############################################
@@ -62,44 +115,52 @@ log_info "✓ Key pair created and saved to ${KEY_NAME}.pem"
 SG_NAME="${SG_NAME:-devops-sg}"
 log_info "[3/5] Checking for security group: ${SG_NAME}"
 
-SG_ID=$(aws ec2 describe-security-groups \
-    --region "${REGION}" \
-    --filters "Name=group-name,Values=${SG_NAME}" \
-    --query 'SecurityGroups[0].GroupId' \
-    --output text 2>/dev/null || echo "")
-
-if [[ -z "$SG_ID" || "$SG_ID" == "None" ]]; then
-    log_warn "Security group '${SG_NAME}' not found, creating new one..."
-    
-    # Get default VPC
-    VPC_ID=$(aws ec2 describe-vpcs \
+if [[ "$DRY_RUN" == "true" ]]; then
+    log_info "[DRY-RUN] Would query for security group: ${SG_NAME}"
+    SG_ID="sg-dry-run-example"
+    log_info "[DRY-RUN] Assuming security group exists"
+else
+    SG_ID=$(aws ec2 describe-security-groups \
         --region "${REGION}" \
-        --filters "Name=isDefault,Values=true" \
-        --query 'Vpcs[0].VpcId' \
-        --output text 2>/dev/null)
-    
-    [[ -n "$VPC_ID" && "$VPC_ID" != "None" ]] || error_exit "Failed to find default VPC"
+        --filters "Name=group-name,Values=${SG_NAME}" \
+        --query 'SecurityGroups[0].GroupId' \
+        --output text 2>/dev/null || echo "")
 
-    SG_ID=$(aws ec2 create-security-group \
-        --group-name "${SG_NAME}" \
-        --description "AutomationLab security group" \
-        --vpc-id "${VPC_ID}" \
-        --region "${REGION}" \
-        --query 'GroupId' \
-        --output text 2>/dev/null)
+    if [[ -z "$SG_ID" || "$SG_ID" == "None" ]]; then
+        log_warn "Security group '${SG_NAME}' not found, creating new one..."
+        
+        # Get default VPC
+        VPC_ID=$(aws ec2 describe-vpcs \
+            --region "${REGION}" \
+            --filters "Name=isDefault,Values=true" \
+            --query 'Vpcs[0].VpcId' \
+            --output text 2>/dev/null)
+        
+        # Guard: VPC must exist
+        [[ -n "$VPC_ID" && "$VPC_ID" != "None" ]] || error_exit "Failed to find default VPC"
 
-    [[ -n "$SG_ID" ]] || error_exit "Failed to create security group"
+        SG_ID=$(aws ec2 create-security-group \
+            --group-name "${SG_NAME}" \
+            --description "AutomationLab security group" \
+            --vpc-id "${VPC_ID}" \
+            --region "${REGION}" \
+            --query 'GroupId' \
+            --output text 2>/dev/null)
 
-    # Add SSH and HTTP rules
-    for PORT in 22 80; do
-        aws ec2 authorize-security-group-ingress \
-            --group-id "$SG_ID" \
-            --protocol tcp \
-            --port "$PORT" \
-            --cidr 0.0.0.0/0 >/dev/null 2>&1 \
-            && log_info "✓ Port $PORT enabled in ${SG_NAME}" \
-            || log_warn "Port $PORT may already exist"
-    done
+        # Guard: Security group must be created
+        [[ -n "$SG_ID" ]] || error_exit "Failed to create security group"
+
+        # Add SSH and HTTP rules
+        for PORT in 22 80; do
+            aws ec2 authorize-security-group-ingress \
+                --group-id "$SG_ID" \
+                --protocol tcp \
+                --port "$PORT" \
+                --cidr 0.0.0.0/0 >/dev/null 2>&1 \
+                && log_info "✓ Port $PORT enabled in ${SG_NAME}" \
+                || log_warn "Port $PORT may already exist"
+        done
+    fi
 fi
 
 log_info "✓ Using security group: ${SG_ID}"
@@ -108,37 +169,53 @@ log_info "✓ Using security group: ${SG_ID}"
 # Step 4: Launch EC2 Instance
 ###############################################
 log_info "[4/5] Launching EC2 instance..."
-INSTANCE_ID=$(aws ec2 run-instances \
-    --image-id "${AMI_ID}" \
-    --instance-type "${INSTANCE_TYPE}" \
-    --key-name "${KEY_NAME}" \
-    --security-group-ids "${SG_ID}" \
-    --region "${REGION}" \
-    --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=AutomationLabInstance},{Key=Project,Value=${TAG_PROJECT}}]" \
-    --query 'Instances[0].InstanceId' \
-    --output text 2>/dev/null)
 
-[[ -n "$INSTANCE_ID" ]] || error_exit "Failed to launch EC2 instance"
-log_info "✓ Instance launched: ${INSTANCE_ID}"
+if [[ "$DRY_RUN" == "true" ]]; then
+    log_info "[DRY-RUN] Would launch EC2 instance with:"
+    log_info "[DRY-RUN]   AMI ID: ${AMI_ID}"
+    log_info "[DRY-RUN]   Instance Type: ${INSTANCE_TYPE}"
+    log_info "[DRY-RUN]   Key Name: ${KEY_NAME}"
+    log_info "[DRY-RUN]   Security Group: ${SG_ID}"
+    log_info "[DRY-RUN]   Region: ${REGION}"
+    log_info "[DRY-RUN]   Tags: Name=AutomationLabInstance, Project=${TAG_PROJECT}"
+    INSTANCE_ID="i-dry-run-example"
+    PUBLIC_IP="203.0.113.42"  # Example IP for dry-run
+    PRIVATE_IP="10.0.1.42"
+else
+    INSTANCE_ID=$(aws ec2 run-instances \
+        --image-id "${AMI_ID}" \
+        --instance-type "${INSTANCE_TYPE}" \
+        --key-name "${KEY_NAME}" \
+        --security-group-ids "${SG_ID}" \
+        --region "${REGION}" \
+        --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=AutomationLabInstance},{Key=Project,Value=${TAG_PROJECT}}]" \
+        --query 'Instances[0].InstanceId' \
+        --output text 2>/dev/null)
 
-# Wait until running
-log_info "Waiting for instance to be running..."
-aws ec2 wait instance-running --region "${REGION}" --instance-ids "${INSTANCE_ID}" 2>/dev/null || error_exit "Instance failed to reach running state"
+    # Guard: Instance must be launched
+    [[ -n "$INSTANCE_ID" ]] || error_exit "Failed to launch EC2 instance"
+    
+    log_info "✓ Instance launched: ${INSTANCE_ID}"
 
-# Get public and private IPs
-PUBLIC_IP=$(aws ec2 describe-instances \
-    --region "${REGION}" \
-    --instance-ids "${INSTANCE_ID}" \
-    --query 'Reservations[0].Instances[0].PublicIpAddress' \
-    --output text 2>/dev/null || echo "N/A")
+    # Wait until running
+    log_info "Waiting for instance to be running..."
+    aws ec2 wait instance-running --region "${REGION}" --instance-ids "${INSTANCE_ID}" 2>/dev/null || error_exit "Instance failed to reach running state"
 
-PRIVATE_IP=$(aws ec2 describe-instances \
-    --region "${REGION}" \
-    --instance-ids "${INSTANCE_ID}" \
-    --query 'Reservations[0].Instances[0].PrivateIpAddress' \
-    --output text 2>/dev/null || echo "N/A")
+    # Get public and private IPs
+    PUBLIC_IP=$(aws ec2 describe-instances \
+        --region "${REGION}" \
+        --instance-ids "${INSTANCE_ID}" \
+        --query 'Reservations[0].Instances[0].PublicIpAddress' \
+        --output text 2>/dev/null || echo "N/A")
 
-[[ "$PUBLIC_IP" == "None" ]] && PUBLIC_IP="N/A"
+    PRIVATE_IP=$(aws ec2 describe-instances \
+        --region "${REGION}" \
+        --instance-ids "${INSTANCE_ID}" \
+        --query 'Reservations[0].Instances[0].PrivateIpAddress' \
+        --output text 2>/dev/null || echo "N/A")
+
+    [[ "$PUBLIC_IP" == "None" ]] && PUBLIC_IP="N/A"
+fi
 
 ###############################################
 # Step 5: Display results and save info
@@ -161,7 +238,10 @@ else
 fi
 
 # Save instance info
-cat > ec2_instance_info.txt <<EOF
+if [[ "$DRY_RUN" == "true" ]]; then
+    log_info "[DRY-RUN] Would save instance information to ec2_instance_info.txt"
+else
+    cat > ec2_instance_info.txt <<EOF
 Instance ID: ${INSTANCE_ID}
 Region: ${REGION}
 Public IP: ${PUBLIC_IP}
@@ -173,13 +253,14 @@ AMI ID: ${AMI_ID}
 Created: $(date)
 EOF
 
-log_info "Instance information saved to ec2_instance_info.txt"
+    log_info "Instance information saved to ec2_instance_info.txt"
 
-# Optional: display instance summary
-aws ec2 describe-instances \
-    --region "${REGION}" \
-    --instance-ids "${INSTANCE_ID}" \
-    --query 'Reservations[0].Instances[0].[InstanceId,State.Name,InstanceType,PublicIpAddress,PrivateIpAddress]' \
-    --output table
+    # Display instance summary
+    aws ec2 describe-instances \
+        --region "${REGION}" \
+        --instance-ids "${INSTANCE_ID}" \
+        --query 'Reservations[0].Instances[0].[InstanceId,State.Name,InstanceType,PublicIpAddress,PrivateIpAddress]' \
+        --output table
+fi
 
 log_info "Script completed successfully"
