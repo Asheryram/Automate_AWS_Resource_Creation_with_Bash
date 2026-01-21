@@ -151,3 +151,4 @@
 [2026-01-21 08:32:05] [DRYRUN]   - Detailed logging of all operations
 [2026-01-21 08:32:05] [INFO] ==========================================
 [2026-01-21 08:32:05] [INFO] No actual resources deleted in dry-run mode
+[2026-01-21 08:51:10] [ERROR] jq is required for state operations
