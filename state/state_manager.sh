@@ -20,7 +20,7 @@ STATE_BUCKET_FILE="$(dirname "${BASH_SOURCE[0]}")/../.state_bucket_name"
 _resolve_state_bucket() {
   # If already set via environment, use that
   if [[ -n "${STATE_BUCKET:-}" ]]; then
-    log_info "Using existing state bucket from environment: $STATE_BUCKET"
+    echo "$STATE_BUCKET"
     return
   fi
   
@@ -29,7 +29,7 @@ _resolve_state_bucket() {
     local saved_bucket
     saved_bucket=$(cat "$STATE_BUCKET_FILE" | tr -d '[:space:]')
     if [[ -n "$saved_bucket" ]]; then
-      log_info "Using existing state bucket from file: $saved_bucket"
+      echo "$saved_bucket"
       return
     fi
   fi
@@ -37,7 +37,7 @@ _resolve_state_bucket() {
   # Generate new bucket name with date (YYYYMMDD format for readability)
   local new_bucket="aws-project-state-$(date +%Y%m%d)-$$"
   echo "$new_bucket" > "$STATE_BUCKET_FILE"
-  log_info "Created new state bucket: $new_bucket"
+  echo "$new_bucket"
 }
 
 STATE_BUCKET="$(_resolve_state_bucket)"
