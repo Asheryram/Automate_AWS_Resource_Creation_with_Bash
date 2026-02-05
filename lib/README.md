@@ -47,7 +47,7 @@ To add a new prompt function, add it to `prompts.sh`:
 # prompt_instance_type: Prompt for EC2 instance type
 prompt_instance_type() {
     local instance_type=""
-    read -rp "Enter EC2 instance type (e.g., t2.micro, t2.small): " instance_type
+    read -rp "Enter EC2 instance type (e.g., t3.micro, t3.small): " instance_type
     while [[ -z "$instance_type" ]]; do
         log_error "Instance type cannot be empty"
         read -rp "Enter EC2 instance type: " instance_type

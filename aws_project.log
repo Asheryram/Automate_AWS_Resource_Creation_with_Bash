@@ -395,7 +395,7 @@
 [2026-01-21 10:00:19] [DRYRUN]    No key pairs yet -> (will be created) (known after apply)
 [2026-01-21 10:00:22] [DRYRUN] 4️⃣ EC2 Instances:
 [2026-01-21 10:00:22] [DRYRUN]    Region: eu-central-1
-[2026-01-21 10:00:22] [DRYRUN]    Instance Type: t2.micro
+[2026-01-21 10:00:22] [DRYRUN]    Instance Type: t3.micro
 [2026-01-21 10:00:22] [DRYRUN]    Tags: Project=AutomationLab
 [2026-01-21 10:00:22] [DRYRUN]    New instance will be created with above configuration (ID: known after apply)
 [2026-01-21 10:00:22] [DRYRUN] ==================================================
@@ -549,7 +549,7 @@
 [2026-01-21 10:13:09] [INFO] RESOURCES TO BE DELETED
 [2026-01-21 10:13:09] [INFO] ==========================================
 [2026-01-21 10:13:09] [INFO] EC2 Instances:
-[2026-01-21 10:13:10] [INFO]   - i-0d0e34163e1cfdccb | Name: AutomationLabInstance | Type: t2.micro | AMI: ami-05000e6b0662e03c0 | Created: 2026-01-21T10:08:08Z
+[2026-01-21 10:13:10] [INFO]   - i-0d0e34163e1cfdccb | Name: AutomationLabInstance | Type: t3.micro | AMI: ami-05000e6b0662e03c0 | Created: 2026-01-21T10:08:08Z
 [2026-01-21 10:13:10] [INFO] Key Pairs:
 [2026-01-21 10:13:10] [INFO]   - automation-lab-key-1768990079 | Created: 2026-01-21T10:08:01Z
 [2026-01-21 10:13:10] [INFO] Security Groups:
@@ -569,7 +569,7 @@
 [2026-01-21 10:14:52] [INFO] RESOURCES TO BE DELETED
 [2026-01-21 10:14:52] [INFO] ==========================================
 [2026-01-21 10:14:52] [INFO] EC2 Instances:
-[2026-01-21 10:14:53] [INFO]   - i-0d0e34163e1cfdccb | Name: AutomationLabInstance | Type: t2.micro | AMI: ami-05000e6b0662e03c0 | Created: 2026-01-21T10:08:08Z
+[2026-01-21 10:14:53] [INFO]   - i-0d0e34163e1cfdccb | Name: AutomationLabInstance | Type: t3.micro | AMI: ami-05000e6b0662e03c0 | Created: 2026-01-21T10:08:08Z
 [2026-01-21 10:14:53] [INFO] Key Pairs:
 [2026-01-21 10:14:53] [INFO]   - automation-lab-key-1768990079 | Created: 2026-01-21T10:08:01Z
 [2026-01-21 10:14:53] [INFO] Security Groups:
@@ -760,7 +760,7 @@
 [2026-01-21 10:27:45] [INFO] RESOURCES TO BE DELETED
 [2026-01-21 10:27:45] [INFO] ==========================================
 [2026-01-21 10:27:45] [INFO] EC2 Instances:
-[2026-01-21 10:27:45] [INFO]   - i-025f994a40e3e94c8 | Name: AutomationLabInstance | Type: t2.micro | AMI: ami-05000e6b0662e03c0 | Created: 2026-01-21T10:26:07Z
+[2026-01-21 10:27:45] [INFO]   - i-025f994a40e3e94c8 | Name: AutomationLabInstance | Type: t3.micro | AMI: ami-05000e6b0662e03c0 | Created: 2026-01-21T10:26:07Z
 [2026-01-21 10:27:45] [INFO] Key Pairs:
 [2026-01-21 10:27:46] [INFO]   - automation-lab-key-1768991159 | Created: 2026-01-21T10:26:00Z
 [2026-01-21 10:27:46] [INFO] Security Groups:
@@ -1031,7 +1031,7 @@
 [2026-01-21 11:43:24] [DRYRUN]    No key pairs yet -> (will be created) (known after apply)
 [2026-01-21 11:43:27] [DRYRUN] 4️ EC2 Instances:
 [2026-01-21 11:43:27] [DRYRUN]    Region: eu-central-1
-[2026-01-21 11:43:27] [DRYRUN]    Instance Type: t2.micro
+[2026-01-21 11:43:27] [DRYRUN]    Instance Type: t3.micro
 [2026-01-21 11:43:27] [DRYRUN]    Tags: Project=AutomationLab
 [2026-01-21 11:43:27] [DRYRUN]    New instance will be created with above configuration (ID: known after apply)
 [2026-01-21 11:43:27] [DRYRUN] ==================================================

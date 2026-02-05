@@ -6,7 +6,7 @@
       "": {
         "name": "AutomationLabInstance",
         "ami": "ami-05000e6b0662e03c0",
-        "instance_type": "t2.micro",
+        "instance_type": "t3.micro",
         "security_group": "",
         "keypair": "automation-lab-key-1768996751",
         "created_at": "2026-01-21T11:59:19Z"

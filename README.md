@@ -31,7 +31,7 @@ SSH_CIDR="203.0.113.0/24" ./create_ec2.sh
 ./create_ec2.sh --dry-run
 
 # Customize instance type and region
-INSTANCE_TYPE="t2.small" AWS_REGION="us-west-2" ./create_ec2.sh
+INSTANCE_TYPE="t3.small" AWS_REGION="us-west-2" ./create_ec2.sh
 ```
 
 **Output**: Instance ID, public/private IPs, SSH command, and key pair name.
@@ -337,7 +337,7 @@ jq --arg r "$resource" --arg id "$id" 'del(.resources[$r][$id])' "$STATE_LOCAL"
 | `AWS_REGION` | `eu-central-1` | AWS region for resources |
 | `STATE_BUCKET` | `aws-project-state` | S3 bucket for state storage |
 | `STATE_KEY` | `state.json` | State file name |
-| `INSTANCE_TYPE` | `t2.micro` | EC2 instance type |
+| `INSTANCE_TYPE` | `t3.micro` | EC2 instance type |
 | `TAG_PROJECT` | `AutomationLab` | Project tag value |
 | `SSH_CIDR` | (prompt) | SSH access CIDR block |
 | `HTTP_CIDR` | (prompt) | HTTP access CIDR block |
@@ -359,7 +359,7 @@ The state file (`state.json`) tracks all created resources:
       "i-0123456789abcdef0": {
         "name": "AutomationLabInstance",
         "ami": "ami-05000e6b0662e03c0",
-        "instance_type": "t2.micro",
+        "instance_type": "t3.micro",
         "security_group": "sg-0123456789abcdef0",
         "keypair": "automation-lab-key-1768991159",
         "created_at": "2026-01-21T10:26:07Z"

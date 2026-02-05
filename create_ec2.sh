@@ -32,7 +32,7 @@ source "${SCRIPT_DIR}/state/state_manager.sh"
 # ------------------------------------------------
 # Config
 # ------------------------------------------------
-INSTANCE_TYPE="${INSTANCE_TYPE:-t2.micro}"
+INSTANCE_TYPE="${INSTANCE_TYPE:-t3.micro}"
 AWS_REGION="${AWS_REGION:-eu-central-1}"
 TAG_PROJECT="${TAG_PROJECT:-AutomationLab}"
 SG_NAME="${SG_NAME:-devops-sg}"
