@@ -10,7 +10,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/../logger.sh"
 # Configuration
 # ============================================================
 AWS_REGION="${AWS_REGION:-eu-central-1}"
-STATE_BUCKET="${STATE_BUCKET:-aws-project-state}"
+STATE_BUCKET="${STATE_BUCKET:-aws-project-state-$(date +%s)}"
 STATE_KEY="${STATE_KEY:-state.json}"
 STATE_LOCAL="./$STATE_KEY"
 
