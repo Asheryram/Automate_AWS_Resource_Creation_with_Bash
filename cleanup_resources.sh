@@ -129,9 +129,14 @@ fi
 
 log_info "=========================================="
 log_info ""
-read -rp "Proceed with deleting all tracked resources? (yes/no) " CONFIRM
-[[ "$CONFIRM" == "yes" ]] || { log_info "Cleanup cancelled"; exit 0; }
-log_info "Cleanup confirmed. Proceeding..."
+
+if [[ "$AUTO_CONFIRM" == "true" ]]; then
+    log_info "Auto-confirm enabled (-y flag). Proceeding with deletion..."
+else
+    read -rp "Proceed with deleting all tracked resources? (yes/no) " CONFIRM
+    [[ "$CONFIRM" == "yes" ]] || { log_info "Cleanup cancelled"; exit 0; }
+    log_info "Cleanup confirmed. Proceeding..."
+fi
 
 # =========================
 # Delete EC2 instances
