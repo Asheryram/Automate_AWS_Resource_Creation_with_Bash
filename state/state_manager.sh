@@ -10,9 +10,37 @@ source "$(dirname "${BASH_SOURCE[0]}")/../logger.sh"
 # Configuration
 # ============================================================
 AWS_REGION="${AWS_REGION:-eu-central-1}"
-STATE_BUCKET="${STATE_BUCKET:-aws-project-state-$(date +%s)}"
 STATE_KEY="${STATE_KEY:-state.json}"
 STATE_LOCAL="./$STATE_KEY"
+
+# State bucket name file - persists the bucket name across runs
+STATE_BUCKET_FILE="$(dirname "${BASH_SOURCE[0]}")/../.state_bucket_name"
+
+# Resolve STATE_BUCKET: check file first, then create new with date
+_resolve_state_bucket() {
+  # If already set via environment, use that
+  if [[ -n "${STATE_BUCKET:-}" ]]; then
+    log_info "Using existing state bucket from environment: $STATE_BUCKET"
+    return
+  fi
+  
+  # Check if we have a saved bucket name
+  if [[ -f "$STATE_BUCKET_FILE" ]]; then
+    local saved_bucket
+    saved_bucket=$(cat "$STATE_BUCKET_FILE" | tr -d '[:space:]')
+    if [[ -n "$saved_bucket" ]]; then
+      log_info "Using existing state bucket from file: $saved_bucket"
+      return
+    fi
+  fi
+  
+  # Generate new bucket name with date (YYYYMMDD format for readability)
+  local new_bucket="aws-project-state-$(date +%Y%m%d)-$$"
+  echo "$new_bucket" > "$STATE_BUCKET_FILE"
+  log_info "Created new state bucket: $new_bucket"
+}
+
+STATE_BUCKET="$(_resolve_state_bucket)"
 
 LOG_LEVEL="${LOG_LEVEL:-INFO}"
 CONSOLE_LOG="${CONSOLE_LOG:-true}"

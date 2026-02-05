@@ -1,0 +1,30 @@
+# SSH Keys
+*.pem
+
+# State management files
+.state_bucket_name
+state.json
+s3_bucket_name.txt
+
+# Backup files
+*.bak
+*.new
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Local environment
+.env
+.env.local

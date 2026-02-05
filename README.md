@@ -154,10 +154,26 @@ log_dryrun "Dry-run preview"
 
 **Features**:
 - S3-based state backend (automatic bucket creation)
+- **Persistent state bucket name** stored in `.state_bucket_name` file
 - Local state file synchronization (`./state.json`)
 - CRUD operations for resource tracking
 - Automatic state push/pull
 - Helper functions for resource management
+
+**State Bucket Resolution**:
+The state manager uses the following priority to determine the S3 state bucket name:
+1. `STATE_BUCKET` environment variable (if set)
+2. `.state_bucket_name` file (if exists) - persists bucket name across runs
+3. Generate new bucket name with date format (`aws-project-state-YYYYMMDD-PID`) and save to file
+
+This ensures consistent state tracking across multiple script executions.
+
+**Generated Files**:
+| File | Purpose |
+|------|---------|
+| `.state_bucket_name` | Stores the S3 state bucket name (persists across runs) |
+| `state.json` | Local copy of the remote state |
+| `s3_bucket_name.txt` | Last created S3 bucket name |
 
 **State Structure**:
 ```json

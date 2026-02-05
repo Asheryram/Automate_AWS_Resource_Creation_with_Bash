@@ -1291,3 +1291,127 @@
 [2026-01-21 15:56:15] [INFO] ==========================================
 [2026-01-21 15:56:15] [INFO] Operation Finished
 [2026-01-21 15:56:15] [INFO] ==========================================
+[2026-02-05 09:24:43] [ERROR] Missing dependencies: jq
+[2026-02-05 09:27:07] [ERROR] Missing dependencies: jq
+[2026-02-05 09:44:07] [ERROR] ❌ AWS credentials are invalid or missing
+[2026-02-05 09:44:07] [ERROR] 
+[2026-02-05 09:44:07] [ERROR] Fix with: aws configure
+[2026-02-05 09:44:08] [ERROR] 
+[2026-02-05 09:44:08] [ERROR] You'll need:
+[2026-02-05 09:44:08] [ERROR]   - AWS Access Key ID
+[2026-02-05 09:44:08] [ERROR]   - AWS Secret Access Key
+[2026-02-05 09:44:08] [ERROR]   - Default region (e.g., eu-central-1)
+[2026-02-05 09:44:08] [ERROR] 
+[2026-02-05 09:44:09] [ERROR] Or set environment variables:
+[2026-02-05 09:44:09] [ERROR]   export AWS_ACCESS_KEY_ID=your_access_key
+[2026-02-05 09:44:09] [ERROR]   export AWS_SECRET_ACCESS_KEY=your_secret_key
+[2026-02-05 09:49:40] [INFO] SSH CIDR set to: 203.0.113.0/24
+[2026-02-05 09:49:40] [INFO] ==========================================
+[2026-02-05 09:49:40] [INFO] EC2 Creation via State Manager
+[2026-02-05 09:49:40] [INFO] ==========================================
+[2026-02-05 09:49:46] [WARN] State bucket 'aws-project-state-20260205-2807' does not exist. Creating it...
+[2026-02-05 09:49:50] [INFO] Bucket 'aws-project-state-20260205-2807' created successfully
+[2026-02-05 09:49:55] [INFO] Initializing remote state
+[2026-02-05 09:50:00] [INFO] Remote state initialized at s3://aws-project-state-20260205-2807/state.json
+[2026-02-05 09:50:17] [INFO] [1/4] Resolving latest Amazon Linux 2 AMI...
+[2026-02-05 09:50:22] [INFO] ✓ AMI resolved: ami-0fb0c2e454e295726
+[2026-02-05 09:50:23] [INFO] [2/4] Creating security group via state manager...
+[2026-02-05 09:50:43] [INFO] Adding SSH ingress rule to security group...
+[2026-02-05 09:50:48] [WARN] SSH rule may already exist
+[2026-02-05 09:50:48] [INFO] ✓ Security group configured (SSH from 
+[2026-02-05 09:49:40] [INFO] SSH CIDR set to: 203.0.113.0/24
+203.0.113.0/24)
+[2026-02-05 09:50:49] [INFO] [3/4] Creating key pair via state manager...
+[2026-02-05 09:51:07] [INFO] [4/4] Launching EC2 via state manager...
+[2026-02-05 09:51:28] [INFO] Waiting for instance to be running...
+[2026-02-05 09:51:44] [INFO] ==========================================
+[2026-02-05 09:51:44] [INFO] EC2 Created & Tracked in State
+[2026-02-05 09:51:44] [INFO] ==========================================
+[2026-02-05 09:51:44] [INFO] Instance ID: i-066604e1700265b0a
+[2026-02-05 09:51:44] [INFO] Public IP: 34.255.182.173
+[2026-02-05 09:51:44] [INFO] Private IP: 172.31.2.168
+[2026-02-05 09:51:44] [INFO] Key Pair: automation-lab-key-1770285049.pem
+[2026-02-05 09:51:45] [INFO] Security Group: sg-006166fdeb4159123
+[2026-02-05 09:51:45] [INFO] SSH: ssh -i automation-lab-key-1770285049.pem ec2-user@34.255.182.173
+[2026-02-05 09:51:45] [INFO] ==========================================
+[2026-02-05 09:51:45] [INFO] Setup Complete
+[2026-02-05 09:51:45] [INFO] ==========================================
+[2026-02-05 09:51:45] [INFO] Script completed successfully
+[2026-02-05 09:52:34] [INFO] ==========================================
+[2026-02-05 09:52:35] [INFO] AWS Resources Cleanup Script
+[2026-02-05 09:52:35] [INFO] ==========================================
+[2026-02-05 09:53:02] [INFO] 
+[2026-02-05 09:53:02] [INFO] ==========================================
+[2026-02-05 09:53:02] [INFO] RESOURCES TO BE DELETED
+[2026-02-05 09:53:02] [INFO] ==========================================
+[2026-02-05 09:53:02] [INFO] ==========================================
+[2026-02-05 09:53:02] [INFO] EC2 Instances:
+[2026-02-05 09:53:03] [INFO]   - i-066604e1700265b0a | Name: AutomationLabInstance | Type: t3.micro | AMI: ami-0fb0c2e454e295726 | Created: 2026-02-05T09:51:14Z
+[2026-02-05 09:53:04] [INFO] Key Pairs:
+[2026-02-05 09:53:04] [INFO]   - automation-lab-key-1770285049 | Created: 2026-02-05T09:50:53Z
+[2026-02-05 09:53:04] [INFO] Security Groups:
+[2026-02-05 09:53:05] [INFO]   - sg-006166fdeb4159123 | Name: devops-sg | Created: 2026-02-05T09:50:28Z
+[2026-02-05 09:53:05] [INFO] S3 Buckets:
+[2026-02-05 09:53:05] [INFO]   None
+[2026-02-05 09:53:05] [INFO] ==========================================
+[2026-02-05 09:53:05] [INFO] 
+[2026-02-05 09:54:16] [INFO] Cleanup cancelled
+[2026-02-05 09:55:05] [INFO] ==========================================
+[2026-02-05 09:55:05] [INFO] S3 Bucket Creation via State Manager
+[2026-02-05 09:55:05] [INFO] ==========================================
+[2026-02-05 09:55:32] [INFO] [1/5] Creating S3 bucket: automation-lab-bucket-1770285305-hp
+[2026-02-05 09:55:38] [INFO] ✓ Bucket created
+[2026-02-05 09:55:38] [INFO] [2/5] Enabling versioning
+[2026-02-05 09:55:45] [INFO] ✓ Versioning enabled
+[2026-02-05 09:55:46] [INFO] [3/5] Adding tags
+[2026-02-05 09:55:53] [INFO] [4/5] Creating and uploading sample file
+[2026-02-05 09:55:58] [INFO] ✓ Sample file uploaded
+[2026-02-05 09:55:58] [INFO] [5/5] Tracking bucket in remote state
+[2026-02-05 09:56:12] [INFO] ==========================================
+[2026-02-05 09:56:12] [INFO] S3 Bucket Created & Tracked
+[2026-02-05 09:56:13] [INFO] ==========================================
+[2026-02-05 09:56:13] [INFO] Bucket: automation-lab-bucket-1770285305-hp
+[2026-02-05 09:56:13] [INFO] Region: eu-central-1
+[2026-02-05 09:56:13] [INFO] Versioning: Enabled
+[2026-02-05 09:56:13] [INFO] ==========================================
+[2026-02-05 09:56:13] [INFO] Bucket created successfully
+[2026-02-05 09:56:14] [INFO] ==========================================
+[2026-02-05 09:56:14] [INFO] Bucket name saved to s3_bucket_name.txt
+[2026-02-05 09:56:14] [INFO] Script completed successfully
+[2026-02-05 10:09:06] [INFO] ==========================================
+[2026-02-05 10:09:06] [INFO] AWS Resources Cleanup Script
+[2026-02-05 10:09:06] [INFO] ==========================================
+[2026-02-05 10:09:37] [INFO] 
+[2026-02-05 10:09:37] [INFO] ==========================================
+[2026-02-05 10:09:37] [INFO] RESOURCES TO BE DELETED
+[2026-02-05 10:09:37] [INFO] ==========================================
+[2026-02-05 10:09:37] [INFO] ==========================================
+[2026-02-05 10:09:37] [INFO] EC2 Instances:
+[2026-02-05 10:09:39] [INFO]   - i-066604e1700265b0a | Name: AutomationLabInstance | Type: t3.micro | AMI: ami-0fb0c2e454e295726 | Created: 2026-02-05T09:51:14Z
+[2026-02-05 10:09:39] [INFO] Key Pairs:
+[2026-02-05 10:09:39] [INFO]   - automation-lab-key-1770285049 | Created: 2026-02-05T09:50:53Z
+[2026-02-05 10:09:39] [INFO] Security Groups:
+[2026-02-05 10:09:40] [INFO]   - sg-006166fdeb4159123 | Name: devops-sg | Created: 2026-02-05T09:50:28Z
+[2026-02-05 10:09:40] [INFO] S3 Buckets:
+[2026-02-05 10:09:40] [INFO]   - automation-lab-bucket-1770285305-hp | Created: 2026-02-05T09:55:58Z
+[2026-02-05 10:09:41] [INFO] ==========================================
+[2026-02-05 10:09:41] [INFO] 
+[2026-02-05 10:10:14] [INFO] Cleanup confirmed. Proceeding...
+[2026-02-05 10:10:14] [WARN] Terminating EC2: i-066604e1700265b0a
+[2026-02-05 10:10:20] [WARN] Terminating EC2: i-066604e1700265b0a
+[2026-02-05 10:10:39] [INFO] ✓ EC2 terminated: i-066604e1700265b0a
+[2026-02-05 10:10:39] [INFO] Waiting for instances to fully terminate...
+[2026-02-05 10:11:30] [INFO] ✓ All instances terminated
+[2026-02-05 10:11:30] [WARN] Deleting Key Pair: automation-lab-key-1770285049
+[2026-02-05 10:11:36] [WARN] Deleting keypair: automation-lab-key-1770285049
+[2026-02-05 10:11:54] [INFO] ✓ Key pair deleted: automation-lab-key-1770285049
+[2026-02-05 10:11:54] [WARN] Deleting Security Group: sg-006166fdeb4159123
+[2026-02-05 10:12:00] [WARN] Deleting security group: sg-006166fdeb4159123
+[2026-02-05 10:12:17] [INFO] ✓ Security group deleted: sg-006166fdeb4159123
+[2026-02-05 10:12:18] [WARN] Deleting S3 Bucket: automation-lab-bucket-1770285305-hp
+[2026-02-05 10:12:54] [INFO] ✓ Bucket deleted: automation-lab-bucket-1770285305-hp
+[2026-02-05 10:13:10] [INFO] ==========================================
+[2026-02-05 10:13:10] [INFO] Cleanup Complete!
+[2026-02-05 10:13:10] [INFO] ==========================================
+[2026-02-05 10:13:10] [INFO] Operation Finished
+[2026-02-05 10:13:10] [INFO] ==========================================
