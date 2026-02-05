@@ -46,6 +46,14 @@ SG_IDS=$(jq -r '.resources.security_group // {} | keys[]' "$STATE_FILE")
 S3_BUCKETS=$(jq -r '.resources.s3 // {} | keys[]' "$STATE_FILE")
 
 # =========================
+# Check if there are any resources to delete
+# =========================
+if [[ -z "$EC2_IDS" && -z "$KEYPAIR_NAMES" && -z "$SG_IDS" && -z "$S3_BUCKETS" ]]; then
+    log_info "No resources tracked in state. Nothing to delete."
+    exit 0
+fi
+
+# =========================
 # Dry-run summary
 # =========================
 if [[ "$DRY_RUN" == "true" ]]; then
@@ -131,7 +139,7 @@ log_info "Cleanup confirmed. Proceeding..."
 for id in $EC2_IDS; do
     log_warn "Terminating EC2: $id"
     if aws ec2 terminate-instances --instance-ids "$id" >/dev/null 2>&1; then
-      ec2_delete "$id"
+      _state_delete "ec2" "$id"
       log_info "✓ EC2 terminated: $id"
     else
       log_error "Failed to terminate EC2: $id"
@@ -151,7 +159,8 @@ fi
 for k in $KEYPAIR_NAMES; do
     log_warn "Deleting Key Pair: $k"
     if aws ec2 delete-key-pair --key-name "$k" >/dev/null 2>&1; then
-      keypair_delete "$k"
+      _state_delete "keypair" "$k"
+      [[ -f "$k.pem" ]] && rm -f "$k.pem"
       log_info "✓ Key pair deleted: $k"
     else
       log_error "Failed to delete key pair: $k"
@@ -168,10 +177,10 @@ for sg in $SG_IDS; do
     # Check if deletion succeeded or if group doesn't exist (already deleted)
     if echo "$SG_DELETE_OUTPUT" | grep -q "InvalidGroup.NotFound\|InvalidGroupId.NotFound" 2>/dev/null; then
       log_warn "Security group already deleted (not found in AWS)"
-      sg_delete "$sg" 2>/dev/null || true
+      _state_delete "security_group" "$sg"
       log_info "✓ Security group removed from state: $sg"
     elif [[ -z "$SG_DELETE_OUTPUT" ]] || echo "$SG_DELETE_OUTPUT" | grep -q "Return\|GroupId" 2>/dev/null; then
-      sg_delete "$sg" 2>/dev/null || true
+      _state_delete "security_group" "$sg"
       log_info "✓ Security group deleted: $sg"
     else
       log_error "Failed to delete security group: $sg (may have dependencies)"
